@@ -11,8 +11,6 @@ public class complexFunction implements complex_function{
 	 * @param right
 	 * @param op
 	 */
-	
-	
 	public complexFunction(function left, function right, Operation op) {
 		this.left = left;
 		this.right = right;
@@ -33,7 +31,7 @@ public class complexFunction implements complex_function{
 		this.right = right;
 		this.op=opRecognize(s);
 	}
-
+	
 	private Operation opRecognize (String s) {
 		s=s.toLowerCase();
 		System.out.println(s);
@@ -139,7 +137,33 @@ public class complexFunction implements complex_function{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	 
+	public boolean equals(complexFunction cf) {
+		if(this.op!=cf.op)
+			return false;
+		else 
+			switch (this.op) {
+			case Comp:
+				break;
+			case Divid:
+				break;
+			case Error:
+				break;
+			case Max:
+				break;
+			case Min:
+				break;
+			case None:
+				break;
+			case Plus:
+				break;
+			case Times:
+				break;
+			default:
+				break;
+		}
+		return false;
+	}
 	@Override
 	public function copy() {
 		return null;
