@@ -27,7 +27,37 @@ public class complexFunction implements complex_function{
 	}
 	@Override
 	public double f(double x) {
-		// TODO Auto-generated method stub
+		if ((function)this instanceof Polynom) {
+			function f=(function)this;
+			Polynom p=(Polynom) f;
+			return p.f(x);
+		}
+		if ((function)this instanceof Monom) {
+			function f=(function)this;
+			Monom m=(Monom)f;
+			return m.f(x);
+		}	
+		switch (this.op){
+		case Comp:
+			double rightAns=this.right.f(x);
+			return this.left.f(rightAns);
+		case Divid:
+			return this.left.f(x)/this.right.f(x);
+		case Error:
+			break;//throw exception
+		case Max:
+			if(this.left.f(x)>this.right.f(x)) return this.left.f(x);
+			return this.right.f(x);
+		case Min:
+			if(this.left.f(x)<this.right.f(x)) return this.left.f(x);
+			return this.right.f(x);
+		case None:
+			break;
+		case Plus:
+			return this.left.f(x)+this.right.f(x);
+		case Times:
+			return this.left.f(x)*this.right.f(x);
+		}
 		return 0;
 	}
 	@Override
