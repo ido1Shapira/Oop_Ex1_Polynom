@@ -11,10 +11,53 @@ public class complexFunction implements complex_function{
 	 * @param right
 	 * @param op
 	 */
+	
+	
 	public complexFunction(function left, function right, Operation op) {
 		this.left = left;
 		this.right = right;
 		this.op = op;
+	}
+	public complexFunction(function left, function right, String s){
+		this.left = left;
+		this.right = right;
+		this.op=opRecognize(s);
+	}
+	public complexFunction(String s, function left, function right){
+		this.left = left;
+		this.right = right;
+		this.op=opRecognize(s);
+	}
+	public complexFunction(function left,String s,  function right){
+		this.left = left;
+		this.right = right;
+		this.op=opRecognize(s);
+	}
+
+	private Operation opRecognize (String s) {
+		s=s.toLowerCase();
+		System.out.println(s);
+		switch(s) {
+		case "plus":
+			return Operation.Plus;
+		case "comp":
+			return Operation.Comp;
+		case "divid":
+			return Operation.Divid;
+		case "error":
+			return Operation.Error;
+		case "max":
+			return Operation.Max;
+		case "min":
+			return Operation.Min;
+		case "none":	
+			return Operation.None;
+		case "times":
+			return Operation.Times;
+		default:
+			System.out.println("couldn't recognize the operation");
+			return Operation.Error;
+		}
 	}
 	public function getLeft() {
 		return left;
@@ -27,13 +70,12 @@ public class complexFunction implements complex_function{
 	}
 	@Override
 	public double f(double x) {
-		if ((function)this instanceof Polynom) {
-			function f=(function)this;
+		function f=(function)this;
+		if (f instanceof Polynom) {
 			Polynom p=(Polynom) f;
 			return p.f(x);
 		}
-		if ((function)this instanceof Monom) {
-			function f=(function)this;
+		if (f instanceof Monom) {
 			Monom m=(Monom)f;
 			return m.f(x);
 		}	
@@ -63,8 +105,34 @@ public class complexFunction implements complex_function{
 	@Override
 	public String toString() {
 		StringBuilder SB = new StringBuilder();
-		
-		return SB.substring(0);
+		function f=(function)this;
+		if (f instanceof Polynom) {
+			Polynom p=(Polynom) f;
+			return p.toString();
+		}
+		if (f instanceof Monom) {
+			Monom m=(Monom)f;
+			return m.toString();
+		}	
+		switch (this.op){
+		case Comp:
+			return "("+this.left.toString()+"("+this.right.toString()+"))";
+		case Divid:
+			return "("+this.left.toString()+") / ("+this.right.toString()+")";
+		case Error:
+			break;//throw exception
+		case Max:
+			return "(max("+this.left.toString()+" , "+this.right.toString()+"))";
+		case Min:
+			return "( min("+this.left.toString()+" , "+this.right.toString()+") )";
+		case None:
+			break;
+		case Plus:
+			return "("+this.left.toString()+") + ("+this.right.toString()+")";
+		case Times:
+			return "("+this.left.toString()+") / ("+this.right.toString()+")";
+		}
+		return "";
 	}
 	@Override
 	public function initFromString(String s) {
