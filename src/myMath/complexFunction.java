@@ -1,6 +1,6 @@
 package myMath;
 
-public class complexFunction implements complex_function{
+public class ComplexFunction implements complex_function{
 
 	private function left;
 	private function right;
@@ -11,36 +11,35 @@ public class complexFunction implements complex_function{
 	 * @param right
 	 * @param op
 	 */
-	public complexFunction(function left, function right, Operation op) {
+	public ComplexFunction(function left, function right, Operation op) {
 		this.left = left;
 		this.right = right;
 		this.op = op;
 	}
-	public complexFunction(function left, function right, String s){
+	public ComplexFunction(function left, function right, String s){
 		this.left = left;
 		this.right = right;
 		this.op=opRecognize(s);
 	}
-	public complexFunction(String s, function left, function right){
+	public ComplexFunction(String s, function left, function right){
 		this.left = left;
 		this.right = right;
 		this.op=opRecognize(s);
 	}
-	public complexFunction(function left,String s,  function right){
+	public ComplexFunction(function left,String s,  function right){
 		this.left = left;
 		this.right = right;
 		this.op=opRecognize(s);
 	}
-	
+
 	private Operation opRecognize (String s) {
 		s=s.toLowerCase();
-		System.out.println(s);
 		switch(s) {
 		case "plus":
 			return Operation.Plus;
 		case "comp":
 			return Operation.Comp;
-		case "divid":
+		case "div":
 			return Operation.Divid;
 		case "error":
 			return Operation.Error;
@@ -50,7 +49,7 @@ public class complexFunction implements complex_function{
 			return Operation.Min;
 		case "none":	
 			return Operation.None;
-		case "times":
+		case "mul":
 			return Operation.Times;
 		default:
 			System.out.println("couldn't recognize the operation");
@@ -102,7 +101,6 @@ public class complexFunction implements complex_function{
 	}
 	@Override
 	public String toString() {
-		StringBuilder SB = new StringBuilder();
 		function f=(function)this;
 		if (f instanceof Polynom) {
 			Polynom p=(Polynom) f;
@@ -114,93 +112,100 @@ public class complexFunction implements complex_function{
 		}	
 		switch (this.op){
 		case Comp:
-			return "("+this.left.toString()+"("+this.right.toString()+"))";
+			return "comp("+this.left.toString()+","+this.right.toString()+")";
 		case Divid:
-			return "("+this.left.toString()+") / ("+this.right.toString()+")";
+			return "div("+this.left.toString()+","+this.right.toString()+")";
 		case Error:
 			break;//throw exception
 		case Max:
-			return "(max("+this.left.toString()+" , "+this.right.toString()+"))";
+			return "max("+this.left.toString()+","+this.right.toString()+")";
 		case Min:
-			return "( min("+this.left.toString()+" , "+this.right.toString()+") )";
+			return "min("+this.left.toString()+","+this.right.toString()+")";
 		case None:
 			break;
 		case Plus:
-			return "("+this.left.toString()+") + ("+this.right.toString()+")";
+			return "plus("+this.left.toString()+","+this.right.toString()+")";
 		case Times:
-			return "("+this.left.toString()+") / ("+this.right.toString()+")";
+			return "mul("+this.left.toString()+","+this.right.toString()+")";
 		}
 		return "";
 	}
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
+		if (s.contains(","))
+			return null;
 		return null;
 	}
-	 
-	public boolean equals(complexFunction cf) {
+
+	public boolean equals(ComplexFunction cf) {//issue!!!!!!
 		if(this.op!=cf.op)
 			return false;
-		else 
+		else {	
+			boolean Ll=this.left.equals(cf.left);
+			boolean Rr=this.right.equals(cf.right);
+			boolean Lr=this.left.equals(cf.right);
+			boolean Rl=this.right.equals(cf.left);
+			boolean RrLl=Rr&&Ll;
+			boolean RlLr=Rl&&Lr;
 			switch (this.op) {
 			case Comp:
-				break;
+				return RrLl;
 			case Divid:
-				break;
+				return RrLl;
 			case Error:
-				break;
+				return RrLl||RlLr;
 			case Max:
-				break;
+				return RrLl||RlLr;
 			case Min:
-				break;
+				return RrLl||RlLr;
 			case None:
-				break;
+				return RrLl||RlLr;
 			case Plus:
-				break;
+				return RrLl||RlLr;
 			case Times:
-				break;
-			default:
-				break;
+				return RrLl||RlLr;
+			}
+			return false;
 		}
-		return false;
 	}
 	@Override
 	public function copy() {
-		return null;
+		
+		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
 	}
 	@Override
 	public void plus(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Plus;
 	}
 	@Override
 	public void mul(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Times;
 	}
 	@Override
 	public void div(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Divid;
 	}
 	@Override
 	public void max(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Max;
 	}
 	@Override
 	public void min(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Min;
 	}
 	@Override
 	public void comp(function f1) {
-		this.left= new complexFunction(this.left,this.right,this.op);
+		this.left= new ComplexFunction(this.left,this.right,this.op);
 		this.right = f1;
 		this.op = Operation.Comp;
 	}

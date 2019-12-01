@@ -264,17 +264,26 @@ public class Monom implements function{
 		return (Math.abs((this.get_coefficient() - m.get_coefficient())) <= Monom.EPSILON) && 
 				(Math.abs((this.get_power() - m.get_power())) <= Monom.EPSILON);
 	}
+	public boolean equals(function f) {
+		if(f instanceof Monom )
+			return this.equals((Monom) f);
+		else 
+			if(f instanceof Polynom) {
+				Polynom p=(Polynom) f;
+				return p.toString().equalsIgnoreCase(this.toString());
+			}
+		return false;
+	}
 	private double _coefficient; 
 	private int _power;
+	
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Monom (s);
 	}
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Monom(this.toString());
 	}
 	
 	

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import myMath.Monom;
 import myMath.Polynom;
-import myMath.complexFunction;
+import myMath.ComplexFunction;
 import myMath.function;
 
 class complexFunctionTest {
@@ -16,7 +16,7 @@ class complexFunctionTest {
 	void test() {
 		Monom m1 = new Monom(2,2);
 		Monom m2 = new Monom(3,3);
-		complexFunction cf = new complexFunction("plus", m1,m2);
+		ComplexFunction cf = new ComplexFunction("plus", m1,m2);
 		//	System.out.println(cf);
 		cf.mul(m2);
 		System.out.println(cf);
@@ -44,8 +44,8 @@ class complexFunctionTest {
 		p2.add(new Monom(3,3));
 		Monom m1 = new Monom(2,2);
 		Monom m2 = new Monom(3,3);
-		complexFunction cf = new complexFunction("plus", m1,m2);
-		complexFunction cf3 = new complexFunction("plus", p1,p2);
+		ComplexFunction cf = new ComplexFunction("plus", m1,m2);
+		ComplexFunction cf3 = new ComplexFunction("plus", p1,p2);
 		//System.out.println(cf);
 		cf.mul(m2);
 		cf3.mul(m2);
@@ -69,8 +69,8 @@ class complexFunctionTest {
 		for(int i=1;i<s3.length;i++) {
 			p3.multiply(new Polynom(s3[i]));
 		}
-		complexFunction cf = new complexFunction("plus", p1,p2);
-		complexFunction cf4 = new complexFunction("div", new Monom("x"),p3);
+		ComplexFunction cf = new ComplexFunction("plus", p1,p2);
+		ComplexFunction cf4 = new ComplexFunction("div", new Monom("x"),p3);
 		cf.div(p1);
 		String s = cf.toString();
 		function cf5 = cf4.initFromString(s);

@@ -78,20 +78,21 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public void add(Monom m1) {
-		int b1 = m1.get_power();
+		Monom mcopy=new Monom(m1);
+		int b1 = mcopy.get_power();
 		boolean added = false;
 		for (int i = 0;i<this.pol.size() && !added;i++) {
 			if (b1 == this.pol.get(i).get_power()) {
-				this.pol.get(i).set_coefficient(this.pol.get(i).get_coefficient() + m1.get_coefficient());
+				this.pol.get(i).set_coefficient(this.pol.get(i).get_coefficient() + mcopy.get_coefficient());
 				added = true;
 			}
 			if (b1 > this.pol.get(i).get_power()) {
-				this.pol.add(i,m1);
+				this.pol.add(i,mcopy);
 				added = true;
 			}
 		}
 		if (!added) {
-			this.pol.add(m1);
+			this.pol.add(mcopy);
 		}
 		this.cleanPol();
 	}
@@ -142,13 +143,17 @@ public class Polynom implements Polynom_able{
 	 * @return true if there are equals false otherwise
 	 */
 	public boolean equals(Polynom_able p1) {
-		this.substract(p1);
-		return this.pol.get(0).equals(Monom.ZERO);
+		Polynom thiscopy= new Polynom(this.toString());
+		thiscopy.substract(p1);
+		for (int i = 0; i < thiscopy.pol.size(); i++) {
+			if(Math.abs(thiscopy.pol.get(i).get_coefficient())>Monom.EPSILON)
+				return false;
+		}
+		return true;
 	}
-	public boolean equals (Object p1) {
+	public boolean equals (Object p1) {//fix me!!
 		if (p1 instanceof Polynom_able) {
-			this.substract((Polynom_able)p1);
-			return this.pol.get(0).equals(Monom.ZERO);
+			return this.equals((Polynom_able) p1);
 		}
 		if (p1 instanceof Monom) {
 			Polynom p=new Polynom(p1.toString());
@@ -162,7 +167,11 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public boolean isZero() {
-		return this.pol.get(0).isZero();
+		for (int i = 0; i < this.pol.size(); i++) {
+			if(this.pol.get(i).get_coefficient()>Monom.EPSILON)
+				return false;
+		}
+		return true;
 	}
 	/*
 	 * this method takes two values of x and find the root between the two values.
@@ -246,9 +255,11 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public void multiply(Monom m1) {
-		double a = m1.get_coefficient();
-		int b = m1.get_power(); 
+		Monom mcopy=new Monom(m1);
+		double a = mcopy.get_coefficient();
+		int b = mcopy.get_power(); 
 		for (int i = 0;i<this.pol.size();i++) {
+			
 			this.pol.get(i).set_coefficient(a*this.pol.get(i).get_coefficient());
 			this.pol.get(i).set_power(b+this.pol.get(i).get_power());
 		}
@@ -272,8 +283,7 @@ public class Polynom implements Polynom_able{
 	}
 	@Override
 	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Polynom(s);
 	}
 	
 }
