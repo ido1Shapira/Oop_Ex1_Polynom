@@ -20,7 +20,7 @@ public class Polynom implements Polynom_able{
 	 */
 	public static final Polynom ZERO = new Polynom("0");
 	private ArrayList<Monom> pol;
-	
+
 	/**
 	 * default constructor
 	 * creates a zero monom as a default polynom 
@@ -28,7 +28,7 @@ public class Polynom implements Polynom_able{
 	public Polynom() {
 		this.pol = new ArrayList<Monom>();
 		this.pol.add(new Monom (0,0));
-//		this.add(Polynom.ZERO);
+		//		this.add(Polynom.ZERO);
 	}
 	/**
 	 * init a Polynom from a String such as:[q
@@ -102,7 +102,7 @@ public class Polynom implements Polynom_able{
 	 * @param p1 the polynom we want to subtract
 	 */
 	public void substract(Polynom_able p1) {
-		Polynom_able copy_p = p1.copy();
+		Polynom_able copy_p = (Polynom_able) p1.copy();
 		Iterator<Monom> it = copy_p.iteretor();
 		while(it.hasNext()) {
 			Monom temp =it.next();
@@ -113,10 +113,10 @@ public class Polynom implements Polynom_able{
 	}
 	private void cleanPol()
 	{
-			for (int i = 0; i < this.pol.size(); i++) {
-				if (this.pol.get(i).isZero()) this.pol.remove(i);
-			}
-			if (pol.size() == 0) this.pol.add(Monom.ZERO);
+		for (int i = 0; i < this.pol.size(); i++) {
+			if (this.pol.get(i).isZero()) this.pol.remove(i);
+		}
+		if (pol.size() == 0) this.pol.add(Monom.ZERO);
 	}
 	/**
 	 * this method multiply the given polynom to our polynom
@@ -124,18 +124,18 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public void multiply(Polynom_able p1) {
-		Polynom_able copy_p1 =p1.copy();
+		Polynom_able copy_p1 =(Polynom_able) p1.copy();
 		Iterator<Monom> it = copy_p1.iteretor();
 		Polynom_able copy_this =this.copy();
 		while(it.hasNext()) {
-			Polynom_able orginal = copy_this.copy();
+			Polynom_able orginal = (Polynom_able) copy_this.copy();
 			Monom m =it.next();
 			orginal.multiply(m);
 			this.add(orginal);
-			}
+		}
 		this.substract(copy_this);
 		this.cleanPol();
-		}
+	}
 
 	/*
 	 * this method checks whether the given polynom and our polynom are logically equals   
@@ -151,7 +151,7 @@ public class Polynom implements Polynom_able{
 		}
 		return true;
 	}
-	public boolean equals (Object p1) {//fix me!!
+	public boolean equals (Object p1) {
 		if (p1 instanceof Polynom_able) {
 			return this.equals((Polynom_able) p1);
 		}
@@ -159,7 +159,8 @@ public class Polynom implements Polynom_able{
 			Polynom p=new Polynom(p1.toString());
 			return this.equals(p);
 		}
-		return false;
+		ComplexFunction cf=new ComplexFunction(this, new Polynom("0"), Operation.None);
+		return cf.equals(p1);
 	}
 	/*
 	 * this method checks whether the given polynom is zero
@@ -223,7 +224,7 @@ public class Polynom implements Polynom_able{
 		}
 		der.cleanPol();
 		return der;
-		
+
 	}
 	/*
 	 * Calculates the area above the x axis between two values of x,
@@ -259,7 +260,7 @@ public class Polynom implements Polynom_able{
 		double a = mcopy.get_coefficient();
 		int b = mcopy.get_power(); 
 		for (int i = 0;i<this.pol.size();i++) {
-			
+
 			this.pol.get(i).set_coefficient(a*this.pol.get(i).get_coefficient());
 			this.pol.get(i).set_power(b+this.pol.get(i).get_power());
 		}
@@ -285,5 +286,5 @@ public class Polynom implements Polynom_able{
 	public function initFromString(String s) {
 		return new Polynom(s);
 	}
-	
+
 }

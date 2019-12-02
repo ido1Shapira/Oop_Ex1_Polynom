@@ -208,12 +208,13 @@ public class PolynomTestEvgeny {
 	public static void test7() throws Exception{ //test deep copy
 		System.out.println("******  Test7 : Copy and creat from string with space  ******");
 		Polynom_able p1 = new Polynom("-4.7x^2-1.0x+6.0");
-		Polynom_able p2 = p1.copy();
+		function p2 = p1.copy();
 		if ( !p1.equals(p2)) {
 			fails++;
 			System.out.println("fail copy");
 		}
-		p2.add(new Monom("x^2"));
+		Polynom_able p3 = (Polynom_able)p2;
+		p3.add(new Monom("x^2"));
 		if ( p1.equals(p2)) {
 			fails++;
 			System.out.println("fail deep copy");

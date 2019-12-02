@@ -267,12 +267,14 @@ public class Monom implements function{
 	public boolean equals(function f) {
 		if(f instanceof Monom )
 			return this.equals((Monom) f);
-		else 
-			if(f instanceof Polynom) {
-				Polynom p=(Polynom) f;
-				return p.toString().equalsIgnoreCase(this.toString());
+		if(f instanceof Polynom) {
+			Polynom p=(Polynom) f;
+			return p.toString().equalsIgnoreCase(this.toString());
 			}
-		return false;
+		else {
+			ComplexFunction cf=new ComplexFunction(this, new Monom("0"), Operation.None);
+			return cf.equals(f);
+		}
 	}
 	private double _coefficient; 
 	private int _power;

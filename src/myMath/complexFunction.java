@@ -12,23 +12,29 @@ public class ComplexFunction implements complex_function{
 	 * @param op
 	 */
 	public ComplexFunction(function left, function right, Operation op) {
-		this.left = left;
-		this.right = right;
+		this.left = left.copy();
+		this.right = right.copy();
 		this.op = op;
 	}
+	public ComplexFunction (function f)
+	{
+		this.left=f.copy();
+		this.right=new Polynom("0");
+		this.op=Operation.None;
+	}
 	public ComplexFunction(function left, function right, String s){
-		this.left = left;
-		this.right = right;
+		this.left = left.copy();
+		this.right = right.copy();
 		this.op=opRecognize(s);
 	}
 	public ComplexFunction(String s, function left, function right){
-		this.left = left;
-		this.right = right;
+		this.left = left.copy();
+		this.right = right.copy();
 		this.op=opRecognize(s);
 	}
 	public ComplexFunction(function left,String s,  function right){
-		this.left = left;
-		this.right = right;
+		this.left = left.copy();
+		this.right = right.copy();
 		this.op=opRecognize(s);
 	}
 
@@ -91,7 +97,7 @@ public class ComplexFunction implements complex_function{
 			if(this.left.f(x)<this.right.f(x)) return this.left.f(x);
 			return this.right.f(x);
 		case None:
-			break;
+			return this.left.f(x);
 		case Plus:
 			return this.left.f(x)+this.right.f(x);
 		case Times:
@@ -132,15 +138,66 @@ public class ComplexFunction implements complex_function{
 	}
 	@Override
 	public function initFromString(String s) {
-		if (s.contains(","))
-			return null;
-		return null;
+		s=s.replace(" ", "");
+		if (s.contains("(")) {
+			String [] sa;
+			sa=s.split("\\(", 2);
+			String noB= sa[1].substring(0,sa[1].length()-1);
+			int commaIndex= mainComma(noB);
+			String f1=noB.substring(0,commaIndex);
+			String f2=noB.substring(commaIndex+1,noB.length());
+			return new ComplexFunction(this.initFromString(f1), this.initFromString(f2), sa[0]);
+		}
+		else {
+			Polynom p=new Polynom();
+			return p.initFromString(s);
+		}
 	}
-
-	public boolean equals(ComplexFunction cf) {//issue!!!!!!
-		if(this.op!=cf.op)
+	   public static int mainComma(String s) {
+	        int ans = -1;
+	        int c =0;
+	        for(int i=0;i<s.length();i++) {
+	            char ch = s.charAt(i);
+	            if(ch=='(') {c++;}
+	            if(ch==')') {c--;}
+	            if(ch==',' && c==0) {
+	                ans = i;
+	            }
+	        }
+	        return ans;
+	   }
+	   
+	   
+	public boolean equals(Object obj) {
+		if (obj instanceof function) {
+			for (double i=-1; i<1; i=i+10*Monom.EPSILON ) {
+				if (Math.abs(((function) obj).f(i)-this.f(i))>Monom.EPSILON) {
+					return false;
+				}
+			}
+		for (int i = 0; i < 10; i++) {
+			for (double j=Math.random() ;j<Math.random()+1; j+=10*Monom.EPSILON ) {
+				if (Math.abs(((function) obj).f(i)-this.f(i))>Monom.EPSILON) {
+					return false;}
+			}
+		}
+		return true;
+		}
+		return false;
+	}
+	
+	   
+	public boolean tryequals(Object cf) {
+		if (cf instanceof ComplexFunction)
+			return this.equals((ComplexFunction)cf);
+		return false;
+	}
+	public boolean tryequals(ComplexFunction cf) {//issue!!!!!!
+		if (this.toString().contentEquals(cf.toString()))//same writing
+				return true;
+		if(this.op!=cf.op) 
 			return false;
-		else {	
+		else {
 			boolean Ll=this.left.equals(cf.left);
 			boolean Rr=this.right.equals(cf.right);
 			boolean Lr=this.left.equals(cf.right);
