@@ -5,7 +5,7 @@ public class edutest {
 
 	public static void main(String[] args) {
 //		test();
-		testOfString();
+//		testOfString();
 //		testcomplexFunction();
 		testDraw();
 		try {
@@ -20,8 +20,12 @@ public class edutest {
 		CollectionFunctions cfColect = new CollectionFunctions();
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2"));
 		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^3"));
+		ComplexFunction cf2 = new ComplexFunction(new Polynom ("x^3"));
+
 		cfColect.add(cf);
 		cfColect.add(cf1);
+		cfColect.add(cf2);
+
 		cfColect.drawFunctions(1000,1000,new Range(-10,10),new Range(-20,20),200);
 	}
 	private static void testdiv() throws Exception{
