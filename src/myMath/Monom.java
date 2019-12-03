@@ -260,28 +260,28 @@ public class Monom implements function{
 	 * @return true if there are equals false otherwise
 	 */
 	public boolean equals(Monom m) {
-		if (this.get_coefficient() == 0 && m.get_coefficient() == 0) return true;
-		return (Math.abs((this.get_coefficient() - m.get_coefficient())) <= Monom.EPSILON) && 
-				(Math.abs((this.get_power() - m.get_power())) <= Monom.EPSILON);
+		if (Math.abs(this.get_coefficient()) <=Monom.EPSILON && Math.abs(m.get_coefficient()) <= Monom.EPSILON) return true;
+		return (Math.abs((this.get_coefficient() - m.get_coefficient())) <= Monom.EPSILON);
 	}
-	public boolean equals(function f) {
+	public boolean equals(Object f) {
 		if(f instanceof Monom )
 			return this.equals((Monom) f);
 		if(f instanceof Polynom) {
-			Polynom p=(Polynom) f;
-			return p.toString().equalsIgnoreCase(this.toString());
+			Polynom copyM = new Polynom(this.toString());
+			return ((Polynom) f).equals(copyM);
 			}
-		else {
-			ComplexFunction cf=new ComplexFunction(this, new Monom("0"), Operation.None);
+		if (f instanceof ComplexFunction) {
+			ComplexFunction cf=new ComplexFunction(this);
 			return cf.equals(f);
 		}
+		return false;
 	}
 	private double _coefficient; 
 	private int _power;
 	
 	@Override
 	public function initFromString(String s) {
-		return new Monom (s);
+		return new Monom(s);
 	}
 	@Override
 	public function copy() {

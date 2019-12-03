@@ -51,11 +51,10 @@ class ComplexFunctionTest {
 	}
 
 	@Test
-	void testToString() {
+	void testToString() { 
 		Polynom p1=new Polynom("x^2+3x-5");
 		Polynom p2=new Polynom("3x^2-7x");
 		ComplexFunction cf=new ComplexFunction(p1, p2, "comp");
-		System.out.println(cf);
 		String expected="comp(X^2+3.0X-5.0,3.0X^2-7.0X)";
 		String actuel=cf.toString();
 		if(!expected.equalsIgnoreCase(actuel))
@@ -107,12 +106,22 @@ class ComplexFunctionTest {
 
 	@Test
 	void testPlus() {
-		fail("Not yet implemented");
+		Polynom p1=new Polynom("x^3+73x-8");
+		Polynom p2=new Polynom("3x^6-7x");
+		ComplexFunction cf=new ComplexFunction(p1, p2, "plus");
+		p1.add(p2);
+		if(!p1.equals(cf))
+			fail("should be equal!");
 	}
 
 	@Test
 	void testMul() {
-		fail("Not yet implemented");
+		Polynom p1=new Polynom("x^2+3x-3");
+		Polynom p2=new Polynom("3x^2-7x");
+		ComplexFunction cf=new ComplexFunction(p1, p2, "mul");
+		p1.multiply(p2);
+		if(! p1.equals(cf))
+			fail("should be equal!");
 	}
 
 	@Test
@@ -145,7 +154,12 @@ class ComplexFunctionTest {
 
 	@Test
 	void testComp() {
-		fail("Not yet implemented");
+		Polynom p1=new Polynom("x^2+3x-3");
+		Polynom p2=new Polynom("3x^2-7x");
+		ComplexFunction cf=new ComplexFunction(p1, p2, "comp");
+		double rightAns=p2.f(8);
+		if(p1.f(rightAns)!=cf.f(8))
+			fail("comp failed");
 	}
 
 
