@@ -7,6 +7,7 @@ public class edutest {
 //		test();
 		testOfString();
 //		testcomplexFunction();
+		testDraw();
 		try {
 			testdiv();
 		} catch (Exception e) {
@@ -14,6 +15,14 @@ public class edutest {
 		}
 		ComplexFunction cf=new ComplexFunction(new Polynom("x"));
 		ComplexFunction cf2=(ComplexFunction) cf.initFromString("comp(x,2)");
+	}
+	private static void testDraw() {
+		CollectionFunctions cfColect = new CollectionFunctions();
+		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2"));
+		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^3"));
+		cfColect.add(cf);
+		cfColect.add(cf1);
+		cfColect.drawFunctions(1000,1000,new Range(-10,10),new Range(-20,20),200);
 	}
 	private static void testdiv() throws Exception{
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^4+x^3-27x^2-25x+50"),new Polynom("x^3-4x^2-7x+10") , "div");

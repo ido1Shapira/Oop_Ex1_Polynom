@@ -1,4 +1,6 @@
 package myMath;
+import java.awt.Color;
+import java.awt.Font;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -8,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Random;
 
 public class CollectionFunctions implements functions {
 	private ArrayList<function> functionsList;
@@ -21,72 +24,70 @@ public class CollectionFunctions implements functions {
 
 	@Override
 	public int size() {
-		return this.size();
+		return this.functionsList.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return this.isEmpty();
+		return this.functionsList.isEmpty();
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		return this.contains(o);
+		if(o instanceof function) {
+			return this.functionsList.contains((function) o);
+		}
+		return false;
 	}
 
 	@Override
 	public Iterator<function> iterator() {
-		return this.iterator();
+		return this.functionsList.iterator();
 	}
 
 	@Override
 	public Object[] toArray() {
-		return this.toArray();
+		return this.functionsList.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		return this.toArray(a);
+		return this.functionsList.toArray(a);
 	}
 
 	@Override
 	public boolean add(function e) {
-		return this.add(e);
+		return this.functionsList.add(e);
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return this.remove(o);
+		return this.functionsList.remove(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.functionsList.containsAll(c);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends function> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.functionsList.addAll(c);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.functionsList.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.functionsList.retainAll(c);
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		this.functionsList.clear();
 	}
 
 	@Override
@@ -115,10 +116,51 @@ public class CollectionFunctions implements functions {
 
 	}
 
+	public void paintFunction(function f,int width, int height, Range rx, Range ry, int resolution) {
+		int n = 1000;
+		double maxY = ry.get_max(), minY = ry.get_min();
+		double maxX = rx.get_max(), minX = rx.get_min();
+		double[] x = new double[n+1];
+		double[] y = new double[n+1];
+		for (int i = 0; i <= n; i++) {
+			x[i] = i / n;
+			y[i] = 4*x[i];
+		}
+		StdDraw.setXscale(minX, maxX);
+		StdDraw.setYscale(minY, maxY);
+		//		//////// x axis
+		StdDraw.setPenColor(Color.black);
+		StdDraw.setPenRadius(0.005);
+		StdDraw.line(minX, y[n/2], maxX, y[n/2]);
+		//////// y axis
+		StdDraw.line(x[n/2], minY, x[n/2], maxY);
+		StdDraw.setPenColor(Color.red);
+		StdDraw.setPenRadius(0.005);
+		for (double i = minY; i <= maxY; i=i+5) {
+			if(i!=0)
+				StdDraw.text(x[n/2]-0.07, i+0.07, Double.toString(i));
+		}
+
+		for (double i = minX; i <= maxX; i=i+2) {
+			StdDraw.text( i+0.07 ,y[n/2]-0.07, Double.toString(i));
+		}
+		Random random = new Random();
+		int r = random.nextInt(256);
+		int g = random.nextInt(256);
+		int b = random.nextInt(256);
+		StdDraw.setPenColor(r,g,b);
+		StdDraw.setPenRadius(0.005);
+		for (double i = minX; i < maxX; i+=0.005) {
+			StdDraw.line(i, f.f(i), i+0.005, f.f(i+0.005));
+		}
+	}
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
-		// TODO Auto-generated method stub
-
+		StdDraw.setCanvasSize(width, height);
+		for (Iterator<function> iterator = functionsList.iterator(); iterator.hasNext();) {
+			function function = (function) iterator.next();
+			paintFunction(function,width,height,rx,ry,resolution);
+		}
 	}
 
 	@Override
