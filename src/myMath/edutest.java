@@ -1,11 +1,10 @@
 package myMath;
 
+import java.io.IOException;
 
 public class edutest {
 
 	public static void main(String[] args) {
-//		ComplexFunction cf=new ComplexFunction(new Polynom("x^2-7"), new Polynom("0"), Operation.Divid);
-//		System.out.println(cf.f(0));
 //		test();
 //		testOfString();
 //		testcomplexFunction();
@@ -15,20 +14,28 @@ public class edutest {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		ComplexFunction cf=new ComplexFunction(new Polynom("x"));
-//		ComplexFunction cf2=(ComplexFunction) cf.initFromString("comp(x,2)");
 	}
 	private static void testDraw() {
 		CollectionFunctions cfColect = new CollectionFunctions();
+		try {
+			cfColect.initFromFile("function_file1.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2"));
 		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^3"));
-		ComplexFunction cf2 = new ComplexFunction(new Polynom ("x^3"));
+		ComplexFunction cf2 = new ComplexFunction(new Polynom ("x^4"));
 
 		cfColect.add(cf);
 		cfColect.add(cf1);
 		cfColect.add(cf2);
 
-		cfColect.drawFunctions(500,500,new Range(-10,10),new Range(-20,20),200);
+		cfColect.drawFunctions(400,400,new Range(-10,10),new Range(-5,15),200);
+		try {
+			cfColect.saveToFile("edut.txt");
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
 	}
 	private static void testdiv() throws Exception{
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^4+x^3-27x^2-25x+50"),new Polynom("x^3-4x^2-7x+10") , "div");
