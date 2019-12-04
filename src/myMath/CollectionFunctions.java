@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 public class CollectionFunctions implements functions {
 	private ArrayList<function> functionsList;
@@ -139,7 +139,7 @@ public class CollectionFunctions implements functions {
 
 	}
 
-	public Color paint(function f,int width, int height, Range rx, Range ry, int res) {	
+	public Color paint(function f, Range rx, Range ry, int res) {	
 		double maxY = ry.get_max(), minY = ry.get_min();
 		double maxX = rx.get_max(), minX = rx.get_min();
 		StdDraw.setXscale(minX, maxX);
@@ -147,42 +147,44 @@ public class CollectionFunctions implements functions {
 		StdDraw.setPenColor(Color.black);
 		StdDraw.setPenRadius(0.005);
 		StdDraw.line(minX, 0, maxX, 0);
-		StdDraw.line(0, minY, 0, maxY);
-//		int n = res;
-//		double maxY = ry.get_max(), minY = ry.get_min();
-//		double maxX = rx.get_max(), minX = rx.get_min();
-//		for (double i=minY; i<maxY; i++)
-//		{
-//			StdDraw.setPenColor(Color.gray);
-//			StdDraw.setPenRadius(0.0005);
-//			StdDraw.line(i,minY,i,maxY);
-//		}
-//		for (double i=minX; i<maxX; i++)
-//		{
-//			StdDraw.setPenColor(Color.gray);
-//			StdDraw.setPenRadius(0.0005);
-//			StdDraw.line(minX,i,maxX,i);
-//		}
-//
-//		StdDraw.setXscale(minX, maxX);
-//		StdDraw.setYscale(minY, maxY); 
-//		///////// x axis
-//		StdDraw.setPenColor(Color.black); StdDraw.setPenRadius(0.005);
-//		StdDraw.line(minX, 0, maxX, 0);
-//		//////// y axis
-//		StdDraw.line((minX+maxX)/2, minY, (minX+maxX)/2, maxY);
-//		StdDraw.setPenColor(Color.red); StdDraw.setPenRadius(0.005);
-//		for (double i = minY; i <= maxY; i=i+1) {
-//			if(i!=0)
-//				StdDraw.text(((minX+maxX)/2)-0.07, i+0.07, Double.toString(i));
-//		}
-//		for (double i = minX; i <= maxX; i=i+2) {
-//			if(i!=0)
-//				StdDraw.text( i+0.07 , ((minY+maxY)/2)-0.07, Double.toString(i));
-//		}
+		StdDraw.line(0, minY, 0, maxY);		
+		double[] x=new double[res+1];
+		double[] y=new double[res+1];
+		double m=minX/(-res/2);
+		double n=minX;
+		
+		for (int i = 0; i < res; i++) {
+			x[i]=m*i+n;
+			y[i]=f.f(x[i]);	
+		}
+		for (double i=minY; i<maxY; i++)
+		{
+			StdDraw.setPenColor(Color.gray);
+			StdDraw.setPenRadius(0.0005);
+			StdDraw.line(minX,i,maxX,i);
+		
+		}
+		for (double i=minX; i<maxX; i++)
+		{
+			StdDraw.setPenColor(Color.gray);
+			StdDraw.setPenRadius(0.0005);
+			StdDraw.line(i,minY,i,maxY);
+		}
+		StdDraw.setPenColor(Color.red); StdDraw.setPenRadius(0.005);
+		for (int i = (int) minY; i <= maxY; i=i+1) {
+			if(i!=0)
+				StdDraw.text(((minX+maxX)/2)-0.07, i+0.07, Integer.toString(i));
+		}
+		for (int i = (int) minX; i <= maxX; i=i+1) {
+			if(i!=0)
+				StdDraw.text(i+0.07 ,minY/(minY-maxY)-0.07, Integer.toString(i));
+		}
 		Random random = new Random();
 		int r = random.nextInt(256); int g = random.nextInt(256); int b = random.nextInt(256);
-//		StdDraw.setPenColor(r,g,b); StdDraw.setPenRadius(0.005);
+		StdDraw.setPenColor(r,g,b); StdDraw.setPenRadius(0.005);
+		for (int i = 0; i < res-1; i++) {
+			StdDraw.line(x[i], y[i], x[i+1], y[i+1]);
+		}
 //		for (double i = minX; i < maxX; i+=0.005) {
 //			StdDraw.line(i, f.f(i), i+0.005, f.f(i+0.005));
 //		}
@@ -197,24 +199,30 @@ public class CollectionFunctions implements functions {
 		StdDraw.setCanvasSize(width, height);
 		for (Iterator<function> iterator = functionsList.iterator(); iterator.hasNext();) {
 			function function = (function) iterator.next();
-			Color colorFunc = paint(function,width,height,rx,ry,resolution);
+			Color colorFunc = paint(function,rx,ry,resolution);
 			System.out.println(colorFunc.toString() + "   f(x)=" + function.toString());
 		}
 	}
 
 	@Override
 	public void drawFunctions(String json_file) {
-		Gson gson = new Gson();
-		try 
-		{
-			FileReader reader = new FileReader("json_file");
-			CollectionFunctions cf = gson.fromJson(reader,CollectionFunctions.class);
-			cf.drawFunctions();
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		// TODO Auto-generated method stub
+		
 	}
+
+//	@Override
+//	public void drawFunctions(String json_file) {
+//		Gson gson = new Gson();
+//		try 
+//		{
+//			FileReader reader = new FileReader("json_file");
+//			CollectionFunctions cf = gson.fromJson(reader,CollectionFunctions.class);
+//			cf.drawFunctions();
+//		} 
+//		catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 
 }

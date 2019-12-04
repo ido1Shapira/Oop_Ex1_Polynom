@@ -185,7 +185,7 @@ public class ComplexFunction implements complex_function{
 			for (double i=-2; i<=2; i=i+1000*Monom.EPSILON ) {
 				if (Math.abs(((function) obj).f(i)-this.f(i))>Monom.EPSILON) {
 					failes++;
-					if(failes>5)
+					if(failes>2)
 						return false;
 				}
 			}
@@ -193,7 +193,7 @@ public class ComplexFunction implements complex_function{
 				for (double j=Math.random() ;j<Math.random()+5; j+=10000*Monom.EPSILON ) {
 					if (Math.abs(((function) obj).f(j)-this.f(j))>Monom.EPSILON) {
 						failes++;
-						if (failes>5)
+						if (failes>2)
 							return false;}
 				}
 			}
