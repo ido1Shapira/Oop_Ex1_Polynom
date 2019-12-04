@@ -182,7 +182,7 @@ public class ComplexFunction implements complex_function{
 	public boolean equals(Object obj) {
 		int failes=0;
 		if (obj instanceof function) {
-			for (double i=-2; i<=2; i=i+100*Monom.EPSILON ) {
+			for (double i=-2; i<=2; i=i+1000*Monom.EPSILON ) {
 				if (Math.abs(((function) obj).f(i)-this.f(i))>Monom.EPSILON) {
 					failes++;
 					if(failes>5)
@@ -190,7 +190,7 @@ public class ComplexFunction implements complex_function{
 				}
 			}
 			for (int i = 0; i < 10; i++) {
-				for (double j=Math.random() ;j<Math.random()+5; j+=100*Monom.EPSILON ) {
+				for (double j=Math.random() ;j<Math.random()+5; j+=10000*Monom.EPSILON ) {
 					if (Math.abs(((function) obj).f(j)-this.f(j))>Monom.EPSILON) {
 						failes++;
 						if (failes>5)

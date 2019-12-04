@@ -122,10 +122,10 @@ public class CollectionFunctions implements functions {
 		double maxX = rx.get_max(), minX = rx.get_min();
 		double[] x = new double[n+1];
 		double[] y = new double[n+1];
-		for (int i = 0; i <= n; i++) {
-			x[i] = i / n;
-			y[i] = 4*x[i];
-		}
+//		for (int i = 0; i <= n; i++) {
+//			x[i] = i / n;
+//			y[i] = 4*x[i];
+//		}
 		StdDraw.setXscale(minX, maxX);
 		StdDraw.setYscale(minY, maxY);
 		//		//////// x axis
