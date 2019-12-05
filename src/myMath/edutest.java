@@ -5,15 +5,31 @@ import java.io.IOException;
 public class edutest {
 
 	public static void main(String[] args) {
-		test();
-		testOfString();
-		testcomplexFunction();
-		testDraw();
-		try {
-			testdiv();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		test();
+//		testOfString();
+//		testcomplexFunction();
+//		testDraw();
+		testDrawFromJcon();
+//		try {
+//			testdiv();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+	}
+	private static void testDrawFromJcon() {
+		CollectionFunctions cfColect = new CollectionFunctions();
+
+		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
+		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^2+8x+16"));
+		ComplexFunction cf2 = new ComplexFunction(new Polynom ("4x-3"));
+		ComplexFunction cf3 = new ComplexFunction(new Polynom ("1"),new Monom("x"),"div" );
+
+		cfColect.add(cf);
+		cfColect.add(cf1);
+		cfColect.add(cf2);
+		cfColect.add(cf3);
+		
+		cfColect.drawFunctions("GUI_params.txt");
 	}
 	private static void testDraw() {
 		CollectionFunctions cfColect = new CollectionFunctions();
@@ -22,15 +38,6 @@ public class edutest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
-//		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^2+8x+16"));
-//		ComplexFunction cf2 = new ComplexFunction(new Polynom ("4x-3"));
-//		ComplexFunction cf3 = new ComplexFunction(new Polynom ("1"),new Monom("x"),"div" );
-//
-//		cfColect.add(cf);
-//		cfColect.add(cf1);
-//		cfColect.add(cf2);
-//		cfColect.add(cf3);
 		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),1000);
 		try {
 			cfColect.saveToFile("edut.txt");

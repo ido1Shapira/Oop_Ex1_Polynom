@@ -1,6 +1,5 @@
 package myMath;
 import java.awt.Color;
-import java.awt.Font;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
+
+import com.google.gson.Gson;
 
 //import com.google.gson.Gson;
 
@@ -109,6 +110,7 @@ public class CollectionFunctions implements functions {
 				function newf = cf.initFromString(strLine);
 				functionsList.add(newf);
 			}
+			br.close();
 
 		} catch (Exception e){
 			System.err.println("Error: " + e.getMessage());
@@ -202,26 +204,19 @@ public class CollectionFunctions implements functions {
 			System.out.println(colorFunc.toString() + "   f(x)=" + function.toString());
 		}
 	}
-
 	@Override
 	public void drawFunctions(String json_file) {
-		// TODO Auto-generated method stub
-		
-	}
+		try 
+		{
+			Gson gson = new Gson();
+			FileReader reader = new FileReader(json_file);
+			Canvas c = gson.fromJson(reader,Canvas.class);
+			this.drawFunctions(c.Width,c.Height,c.Range_X,c.Range_Y,c.Resolution);
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
-//	@Override
-//	public void drawFunctions(String json_file) {
-//		Gson gson = new Gson();
-//		try 
-//		{
-//			FileReader reader = new FileReader("json_file");
-//			CollectionFunctions cf = gson.fromJson(reader,CollectionFunctions.class);
-//			cf.drawFunctions();
-//		} 
-//		catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	}
 
 }
