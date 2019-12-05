@@ -8,7 +8,7 @@ public class edutest {
 		test();
 		testOfString();
 		testcomplexFunction();
-		testDraw();
+	//	testDraw();
 		testDrawFromJcon();
 		try {
 			testdiv();
@@ -38,7 +38,7 @@ public class edutest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),1000);
+		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),5000);
 		try {
 			cfColect.saveToFile("edut.txt");
 		} catch (IOException e) {

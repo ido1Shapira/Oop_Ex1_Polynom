@@ -13,7 +13,8 @@ public class ComplexFunction implements complex_function{
 	 */
 	public ComplexFunction(function left, function right, Operation op) {
 		this.left = left.copy();
-		this.right = right.copy();
+		if(right != null) this.right = right.copy();
+		else this.right=null;
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
 		this.op = op;
@@ -21,6 +22,7 @@ public class ComplexFunction implements complex_function{
 	public ComplexFunction(Operation op, function left, function right) {
 		if(left != null) this.left = left.copy();
 		if(right != null) this.right = right.copy();
+		else this.right=null;
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
 		this.op = op;
@@ -28,28 +30,31 @@ public class ComplexFunction implements complex_function{
 	public ComplexFunction (function f)
 	{
 		this.left=f.copy();
-		this.right=new Polynom("0");
+		this.right=null;
 		this.op=Operation.None;
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
 	}
 	public ComplexFunction(function left, function right, String s){
 		this.left = left.copy();
-		this.right = right.copy();
+		if(right != null) this.right = right.copy();
+		else this.right=null;
 		this.op=opRecognize(s);
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
 	}
 	public ComplexFunction(String s, function left, function right){
 		this.left = left.copy();
-		this.right = right.copy();
+		if(right != null) this.right = right.copy();
+		else this.right=null;
 		this.op=opRecognize(s);
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
 	}
 	public ComplexFunction(function left,String s,  function right){
 		this.left = left.copy();
-		this.right = right.copy();
+		if(right != null) this.right = right.copy();
+		else this.right=null;
 		this.op=opRecognize(s);
 		if(op==Operation.Error)
 			throw new IllegalArgumentException("Error!");
