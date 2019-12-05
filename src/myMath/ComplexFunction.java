@@ -208,44 +208,7 @@ public class ComplexFunction implements complex_function{
 		}
 		return false;
 	}  
-	//	public boolean tryequals(Object cf) {
-	//		if (cf instanceof ComplexFunction)
-	//			return this.equals((ComplexFunction)cf);
-	//		return false;
-	//	}
-	//	public boolean tryequals(ComplexFunction cf) {//issue!!!!!!
-	//		if (this.toString().contentEquals(cf.toString()))//same writing
-	//				return true;
-	//		if(this.op!=cf.op) 
-	//			return false;
-	//		else {
-	//			boolean Ll=this.left.equals(cf.left);
-	//			boolean Rr=this.right.equals(cf.right);
-	//			boolean Lr=this.left.equals(cf.right);
-	//			boolean Rl=this.right.equals(cf.left);
-	//			boolean RrLl=Rr&&Ll;
-	//			boolean RlLr=Rl&&Lr;
-	//			switch (this.op) {
-	//			case Comp:
-	//				return RrLl;
-	//			case Divid:
-	//				return RrLl;
-	//			case Error:
-	//				return RrLl||RlLr;
-	//			case Max:
-	//				return RrLl||RlLr;
-	//			case Min:
-	//				return RrLl||RlLr;
-	//			case None:
-	//				return RrLl||RlLr;
-	//			case Plus:
-	//				return RrLl||RlLr;
-	//			case Times:
-	//				return RrLl||RlLr;
-	//			}
-	//			return false;
-	//		}
-	//	}
+	
 	@Override
 	public function copy() {	
 		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
