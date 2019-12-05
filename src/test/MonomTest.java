@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import myMath.Monom;
+import myMath.function;
 
 class MonomTest {
 	@Test
@@ -104,12 +105,19 @@ class MonomTest {
 	}
 	@Test
 	void testInitFromString() {
-		fail("Not yet implemented");
+		Monom m=new Monom("2x^7");
+		function d=m.initFromString(m.toString());
+		if(!m.equals(d))
+			fail("initFromString failed");
 	}
 
 	@Test
 	void testCopy() {
-		fail("Not yet implemented");
+		Monom m=new Monom ("2x");
+		function f=m.copy();
+		m.add(new Monom ("4x"));
+		if(f.equals(m))
+			fail("copy failed");
 	}
 
 }

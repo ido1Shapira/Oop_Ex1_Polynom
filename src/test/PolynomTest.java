@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import myMath.Monom;
 import myMath.Polynom;
 import myMath.Polynom_able;
+import myMath.function;
 
 class PolynomTest {
 
@@ -61,7 +62,7 @@ class PolynomTest {
 	void testSubstract() {
 		Polynom p1 = new Polynom("3x^2+x^3+4");
 		Polynom p2 = new Polynom("4*x^3+x^2-5X+1");
-		Polynom expected = new Polynom("3x^3+2x^2+5x+3");
+		Polynom expected = new Polynom("-3x^3+2x^2+5x+3");
 		p1.substract(p2);
 		if(!p1.equals(expected))
 			fail("substract Polynoms, expected="+ expected+ " got: "+ p1);
@@ -130,7 +131,10 @@ class PolynomTest {
 
 	@Test
 	void testInitFromString() {
-		fail("Not yet implemented");
+		Polynom p=new Polynom("2x^7+2x^2-9");
+		function d=p.initFromString(p.toString());
+		if(!p.equals(d))
+			fail("initFromString failed");
 	}
 
 }

@@ -5,19 +5,19 @@ import java.io.IOException;
 public class edutest {
 
 	public static void main(String[] args) {
-//		test();
-//		testOfString();
-//		testcomplexFunction();
-//		testDraw();
+		test();
+		testOfString();
+		testcomplexFunction();
+		testDraw();
 		testDrawFromJcon();
-//		try {
-//			testdiv();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			testdiv();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	private static void testDrawFromJcon() {
-		CollectionFunctions cfColect = new CollectionFunctions();
+		Functions_GUI cfColect = new Functions_GUI();
 
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
 		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^2+8x+16"));
@@ -29,10 +29,10 @@ public class edutest {
 		cfColect.add(cf2);
 		cfColect.add(cf3);
 		
-		cfColect.drawFunctions("GUI_params.txt");
+		cfColect.drawFunctions("GUI_params.json");
 	}
 	private static void testDraw() {
-		CollectionFunctions cfColect = new CollectionFunctions();
+		Functions_GUI cfColect = new Functions_GUI();
 		try {
 			cfColect.initFromFile("morefunc.txt");
 		} catch (IOException e) {

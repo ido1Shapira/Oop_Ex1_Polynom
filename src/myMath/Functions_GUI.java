@@ -17,15 +17,13 @@ import java.util.Random;
 
 import com.google.gson.Gson;
 
-//import com.google.gson.Gson;
-
-public class CollectionFunctions implements functions {
+public class Functions_GUI implements functions {
 	private ArrayList<function> functionsList;
 
 	/**
 	 * Default constructor
 	 */
-	public CollectionFunctions() {
+	public Functions_GUI() {
 		this.functionsList = new ArrayList<function>();
 	}
 
@@ -115,8 +113,6 @@ public class CollectionFunctions implements functions {
 		} catch (Exception e){
 			System.err.println("Error: " + e.getMessage());
 		}
-		
-
 	}
 
 	@Override
@@ -137,9 +133,7 @@ public class CollectionFunctions implements functions {
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-			return;
 		}
-
 	}
 
 	public Color paint(function f, Range rx, Range ry, int res) {	
@@ -165,7 +159,7 @@ public class CollectionFunctions implements functions {
 			StdDraw.setPenColor(Color.gray);
 			StdDraw.setPenRadius(0.0005);
 			StdDraw.line(minX,i,maxX,i);
-		
+
 		}
 		for (double i=minX; i<maxX; i++)
 		{
@@ -196,12 +190,13 @@ public class CollectionFunctions implements functions {
 	}
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
-
+		int i=0;
 		StdDraw.setCanvasSize(width, height);
 		for (Iterator<function> iterator = functionsList.iterator(); iterator.hasNext();) {
 			function function = (function) iterator.next();
 			Color colorFunc = paint(function,rx,ry,resolution);
-			System.out.println(colorFunc.toString() + "   f(x)=" + function.toString());
+			System.out.println(i+") "+colorFunc.toString() + "   f(x)=" + function.toString());
+			i++;
 		}
 	}
 	@Override
@@ -211,12 +206,16 @@ public class CollectionFunctions implements functions {
 			Gson gson = new Gson();
 			FileReader reader = new FileReader(json_file);
 			Canvas c = gson.fromJson(reader,Canvas.class);
-			this.drawFunctions(c.Width,c.Height,c.Range_X,c.Range_Y,c.Resolution);
+			this.drawFunctions(c.Width,c.Height,new Range(c.Range_X[0],c.Range_X[1]),new Range(c.Range_Y[0],c.Range_Y[1]),c.Resolution);
 		} 
 		catch (FileNotFoundException e) {
-			e.printStackTrace();
+			this.drawFunctions("GUI_params.json");
 		}
 
+	}
+
+	public function get(int i) {
+		return this.functionsList.get(i);
 	}
 
 }

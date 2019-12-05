@@ -4,8 +4,8 @@ public class Canvas {
 	public int Width;
 	public int Height;
 	public int Resolution;
-	public Range Range_X;
-	public Range Range_Y;
+	public double[] Range_X = new double[2];
+	public double[] Range_Y=  new double[2];
 	/**
 	 * @param width
 	 * @param height
@@ -13,7 +13,8 @@ public class Canvas {
 	 * @param range_X
 	 * @param range_Y
 	 */
-	public Canvas(int width, int height, int resolution, Range range_X, Range range_Y) {
+	public Canvas(int width, int height, int resolution, double[] range_X, double[] range_Y) {
+		super();
 		Width = width;
 		Height = height;
 		Resolution = resolution;
