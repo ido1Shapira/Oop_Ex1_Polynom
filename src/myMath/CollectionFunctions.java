@@ -150,9 +150,9 @@ public class CollectionFunctions implements functions {
 		StdDraw.line(0, minY, 0, maxY);		
 		double[] x=new double[res+1];
 		double[] y=new double[res+1];
-		double m=minX/(-res/2);
+		double m=(maxX-minX)/(res);
 		double n=minX;
-		
+
 		for (int i = 0; i < res; i++) {
 			x[i]=m*i+n;
 			y[i]=f.f(x[i]);	
@@ -173,7 +173,7 @@ public class CollectionFunctions implements functions {
 		StdDraw.setPenColor(Color.red); StdDraw.setPenRadius(0.005);
 		for (int i = (int) minY; i <= maxY; i=i+1) {
 			if(i!=0)
-				StdDraw.text(((minX+maxX)/2)-0.07, i+0.07, Integer.toString(i));
+				StdDraw.text((minX/(minX-maxX))-0.07, i+0.07, Integer.toString(i));
 		}
 		for (int i = (int) minX; i <= maxX; i=i+1) {
 			if(i!=0)
@@ -185,9 +185,7 @@ public class CollectionFunctions implements functions {
 		for (int i = 0; i < res-1; i++) {
 			StdDraw.line(x[i], y[i], x[i+1], y[i+1]);
 		}
-//		for (double i = minX; i < maxX; i+=0.005) {
-//			StdDraw.line(i, f.f(i), i+0.005, f.f(i+0.005));
-//		}
+
 		return new Color(r,g,b);
 	}
 	public void drawFunctions() {

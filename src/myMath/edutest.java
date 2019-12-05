@@ -17,21 +17,21 @@ public class edutest {
 	}
 	private static void testDraw() {
 		CollectionFunctions cfColect = new CollectionFunctions();
-//		try {
-//			cfColect.initFromFile("function_file1.txt");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
-		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^2+8x+16"));
-		ComplexFunction cf2 = new ComplexFunction(new Polynom ("4x-3"));
-		ComplexFunction cf3 = new ComplexFunction(new Polynom ("1"),new Monom("x"),"div" );
-
-		cfColect.add(cf);
-		cfColect.add(cf1);
-		cfColect.add(cf2);
-		cfColect.add(cf3);
-		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),1000);
+		try {
+			cfColect.initFromFile("morefunc.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
+//		ComplexFunction cf1 = new ComplexFunction(new Polynom ("x^2+8x+16"));
+//		ComplexFunction cf2 = new ComplexFunction(new Polynom ("4x-3"));
+//		ComplexFunction cf3 = new ComplexFunction(new Polynom ("1"),new Monom("x"),"div" );
+//
+//		cfColect.add(cf);
+//		cfColect.add(cf1);
+//		cfColect.add(cf2);
+//		cfColect.add(cf3);
+		cfColect.drawFunctions(800,600,new Range(0,10),new Range(-1,15),1000);
 		try {
 			cfColect.saveToFile("edut.txt");
 		} catch (IOException e) {

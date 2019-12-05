@@ -18,6 +18,13 @@ public class ComplexFunction implements complex_function{
 			throw new IllegalArgumentException("Error!");
 		this.op = op;
 	}
+	public ComplexFunction(Operation op, function left, function right) {
+		this.left = left.copy();
+		this.right = right.copy();
+		if(op==Operation.Error)
+			throw new IllegalArgumentException("Error!");
+		this.op = op;
+	}
 	public ComplexFunction (function f)
 	{
 		this.left=f.copy();
