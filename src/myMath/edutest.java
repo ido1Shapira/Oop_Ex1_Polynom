@@ -5,15 +5,15 @@ import java.io.IOException;
 public class edutest {
 
 	public static void main(String[] args) {
-//		test();
-//		testOfString();
-//		testcomplexFunction();
+		test();
+		testOfString();
+		testcomplexFunction();
 		testDraw();
-//		try {
-//			testdiv();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			testdiv();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	private static void testDraw() {
 		CollectionFunctions cfColect = new CollectionFunctions();
@@ -31,7 +31,7 @@ public class edutest {
 //		cfColect.add(cf1);
 //		cfColect.add(cf2);
 //		cfColect.add(cf3);
-		cfColect.drawFunctions(800,600,new Range(0,10),new Range(-1,15),1000);
+		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),1000);
 		try {
 			cfColect.saveToFile("edut.txt");
 		} catch (IOException e) {

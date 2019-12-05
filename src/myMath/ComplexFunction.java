@@ -206,9 +206,11 @@ public class ComplexFunction implements complex_function{
 			}
 			return true;
 		}
+
+
 		return false;
 	}  
-	
+
 	@Override
 	public function copy() {	
 		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
