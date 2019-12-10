@@ -120,6 +120,7 @@ class ComplexFunctionTest {
 		Polynom p2=new Polynom("3x^2-7x");
 		ComplexFunction cf=new ComplexFunction(p1, p2, "mul");
 		p1.multiply(p2);
+		System.out.println(p1+"    "+cf);
 		if(! p1.equals(cf))
 			fail("should be equal!");
 	}

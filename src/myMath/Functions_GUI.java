@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 public class Functions_GUI implements functions {
 	private ArrayList<function> functionsList;
@@ -96,7 +97,7 @@ public class Functions_GUI implements functions {
 	}
 
 	@Override
-	public void initFromFile(String pathFile) throws IOException {
+	public void initFromFile(String pathFile) {
 		try {
 			FileInputStream fstream = new FileInputStream(pathFile);
 			DataInputStream in = new DataInputStream(fstream);
@@ -191,6 +192,8 @@ public class Functions_GUI implements functions {
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
 		int i=0;
+		if(resolution<=0)
+			throw new IllegalArgumentException();
 		StdDraw.setCanvasSize(width, height);
 		for (Iterator<function> iterator = functionsList.iterator(); iterator.hasNext();) {
 			function function = (function) iterator.next();
@@ -205,11 +208,20 @@ public class Functions_GUI implements functions {
 		{
 			Gson gson = new Gson();
 			FileReader reader = new FileReader(json_file);
-			Canvas c = gson.fromJson(reader,Canvas.class);
+			Canvas c = gson.fromJson(reader,Canvas.class);	
+			if(c.Range_X[0]> c.Range_X[1] || c.Range_Y[0]> c.Range_Y[1])
+				throw new IllegalArgumentException();
 			this.drawFunctions(c.Width,c.Height,new Range(c.Range_X[0],c.Range_X[1]),new Range(c.Range_Y[0],c.Range_Y[1]),c.Resolution);
 		} 
 		catch (FileNotFoundException e) {
 			this.drawFunctions("GUI_params.json");
+		}
+		catch (IllegalArgumentException e) {
+			this.drawFunctions("GUI_params.json");
+		}
+		catch (JsonSyntaxException e) {
+			this.drawFunctions("GUI_params.json");
+
 		}
 
 	}

@@ -189,8 +189,6 @@ public class ComplexFunction implements complex_function{
 		}
 		return ans;
 	}
-
-
 	public boolean equals(Object obj) {
 		int failes=0;
 		if (obj instanceof function) {
@@ -201,8 +199,9 @@ public class ComplexFunction implements complex_function{
 						return false;
 				}
 			}
-			for (int i = 0; i < 10; i++) {
-				for (double j=Math.random() ;j<Math.random()+5; j+=10000*Monom.EPSILON ) {
+			for (int i = 0; i < 5; i++) {
+				double d = Math.random()*20*Math.pow(-1,i);
+				for (double j=d ;j<d+5; j+=0.001) {
 					if (Math.abs(((function) obj).f(j)-this.f(j))>Monom.EPSILON) {
 						failes++;
 						if (failes>2)
@@ -215,45 +214,52 @@ public class ComplexFunction implements complex_function{
 
 		return false;
 	}  
-
 	@Override
 	public function copy() {	
-		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
+		ComplexFunction cf=new ComplexFunction(new Monom("x"));
+		return (function) cf.initFromString(this.toString());
+		//		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
 	}
 	@Override
 	public void plus(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Plus;
 	}
 	@Override
 	public void mul(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Times;
 	}
 	@Override
 	public void div(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Divid;
 	}
 	@Override
 	public void max(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Max;
 	}
 	@Override
 	public void min(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Min;
 	}
 	@Override
 	public void comp(function f1) {
+		function temp= f1.copy();
 		this.left= new ComplexFunction(this.left,this.right,this.op);
-		this.right = f1.copy();
+		this.right = temp;
 		this.op = Operation.Comp;
 	}
 	@Override
