@@ -104,7 +104,7 @@ cf is a complex function object, f is a function, x is a double, s is a String a
 
 •	 cf. equals (obj)- in case obj is a function, cf is logically compered to obj (suppose to return true if equal for every value in the 
 X axis, false otherwise)
-this method is very tricky since we cannot check every value in the scale. in our program we decided to check 100 random values in addition to the range (-2,2). 
+this method is very tricky since we cannot check every value in the scale. in our program we decided to check 1000 random values in addition to the range (-2,2). 
 our method allows 2 unequal values in order to cover cases of holes in one function which is being compared to an equal but continues function. This compare can of course fail since we don't check every value. Statistically it has high odds to succeed but not 100% of the time. 
  
 # Functions GUI class
