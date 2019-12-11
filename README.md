@@ -89,6 +89,9 @@ Our class represents an object called complex function which defined as follows:
    
    a complex function for example looks like:
    
+   ![complexFunctionImage](https://user-images.githubusercontent.com/46196656/70648690-52311380-1c54-11ea-96c3-42daad140b35.png)
+
+   
  
 ### Methods that can be applied on complex function: 
 
