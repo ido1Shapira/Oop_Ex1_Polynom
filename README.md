@@ -86,6 +86,9 @@ Our class represents an object called complex function which defined as follows:
    *None- gets the left side value only 
    
    *Error- technically is a valid operation but cannot but be applied on a complex function -throws exception. 
+   
+   a complex function for example looks like:
+   
  
 ### Methods that can be applied on complex function: 
 
