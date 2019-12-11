@@ -1,6 +1,6 @@
 # Polynom & Monom classes 
 
-Our class represents Monoms and Polynoms as defined in Wikipedia. 
+Our classes represents Monoms and Polynoms as defined in Wikipedia. 
 
 Monom  is an expression of the form a*x^b (a*xb) or ax^b (axb) when a is a real number and b is a non-negative integer. 
 
