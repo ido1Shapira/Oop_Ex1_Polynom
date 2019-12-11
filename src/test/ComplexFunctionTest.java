@@ -24,12 +24,12 @@ class ComplexFunctionTest {
 
 
 	@Test
-	void testGetLeft() {
+	void testleft() {
 		Monom m1 = new Monom(2,2);
 		Monom m2 = new Monom(3,3);
 		ComplexFunction cf = new ComplexFunction("plus", m1,m2);
 		cf.mul(m2);
-		function f=(function) cf.getLeft();
+		function f=(function) cf.left();
 		if (f instanceof Monom) {
 			Monom m=(Monom)f;
 			if(!m.equals(m1)){

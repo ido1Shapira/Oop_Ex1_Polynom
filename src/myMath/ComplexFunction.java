@@ -119,15 +119,15 @@ public class ComplexFunction implements complex_function{
 	 * 
 	 * @return left arm function
 	 */
-	public function getLeft() {
-		return left;
+	public function left() {
+		return this.left;
 	}
 	/**
 	 * 
 	 * @return right arm function
 	 */
-	public function getRight() {
-		return right;
+	public function right() {
+		return this.right;
 	}
 	/**
 	 * @return op main operation 
@@ -237,7 +237,7 @@ public class ComplexFunction implements complex_function{
 	}
 	/**
 	 * this method checks whether the object and our complex function are visually similar. 
-	 * if the object is not a function return false, else we check the range (-2,2) and in addition 100 random integers.
+	 * if the object is not a function return false, else we check the range (-2,2) and in addition 1000 random integers.
 	 * @param obj the object we compare to
 	 * @return true if the values we checked are equals, false otherwise  
 	 */
@@ -267,11 +267,21 @@ public class ComplexFunction implements complex_function{
 			return false;
 		}
 	}  
+	/**
+	 * @return deep copy of our the complex function 
+	 */
 	@Override
 	public function copy() {	
-		ComplexFunction cf=new ComplexFunction(new Monom("x"));
+		ComplexFunction cf=new ComplexFunction(new Monom("x")); // created only to activate initfromstring
 		return (function) cf.initFromString(this.toString());
 	}
+	/**
+	 * this method builds a new complex function 
+	 * which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the plus.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void plus(function f1) {
 		function temp= f1.copy();
@@ -279,6 +289,13 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Plus;
 	}
+	/**
+	 * this method builds a new complex function
+	 * which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the times.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void mul(function f1) {
 		function temp= f1.copy();
@@ -286,6 +303,12 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Times;
 	}
+	/**
+	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the divid.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void div(function f1) {
 		function temp= f1.copy();
@@ -293,6 +316,12 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Divid;
 	}
+	/**
+	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the max.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void max(function f1) {
 		function temp= f1.copy();
@@ -300,6 +329,12 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Max;
 	}
+	/**
+	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the min.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void min(function f1) {
 		function temp= f1.copy();
@@ -307,6 +342,12 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Min;
 	}
+	/**
+	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * it's right side is f1's copy and it's operation is the comp.
+	 * our complex function now points this new Complex function
+	 * @param f1 the function to put on the right side 
+	 */
 	@Override
 	public void comp(function f1) {
 		function temp= f1.copy();
@@ -314,12 +355,5 @@ public class ComplexFunction implements complex_function{
 		this.right = temp;
 		this.op = Operation.Comp;
 	}
-	@Override
-	public function left() {
-		return this.left;
-	}
-	@Override
-	public function right() {
-		return this.right;
-	}
+
 }
