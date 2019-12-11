@@ -103,7 +103,7 @@ cf is a complex function object, f is a function, x is a double, s is a String a
 
 •	 cf.toString – returns a string represents the complex function structure. 
 
-•	 cf.initFromString(s)-returns a pointer to the function the string represents (could be a complex function or a Polynom (every Monom is a Polynom, cf is not affected by this action. 
+•	 cf.initFromString(s)-returns a pointer to the function the string represents (could be a complex function or a Polynom (every Monom is a Polynom)), cf is not affected by this action. 
 
 •	 cf. equals (obj)- in case obj is a function, cf is logically compered to obj (suppose to return true if equal for every value in the 
 X axis, false otherwise)
@@ -123,6 +123,6 @@ We chose to use java’s array list.
 
 •	saveToFile- gets a name for the file we want to create and prints to the file all of the functions in our list.
 
-•	paint (Auxiliary method) - this method get a function and painting it to a GOI window according the parameters this method got. 
+•	paint (Auxiliary method) - this method get a function and painting it to a GUI window according the parameters this method got. 
 
 •	drawFunctions- there are three drawFunctions methods that have the  same goal, which is to draw each function in the collection. Each method has a different way to get the parameters for the GUI window such as height, width, rx (X axis range) ,ry (Y axis range) and resolution. the first doesn't get any parameter and draws the window according to default parameters. The second gets real parameters and draws accordingly. And the third gets the parameters from a json file.
