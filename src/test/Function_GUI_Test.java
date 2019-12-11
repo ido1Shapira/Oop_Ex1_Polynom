@@ -2,34 +2,19 @@ package test;
 
 import java.io.IOException;
 
-import myMath.ComplexFunction;
-import myMath.Functions_GUI;
-import myMath.Monom;
-import myMath.Polynom;
-import myMath.Range;
-import myMath.function;
+import org.junit.jupiter.api.Test;
 
-public class edutest {
+import Ex1.ComplexFunction;
+import Ex1.Functions_GUI;
+import Ex1.Monom;
+import Ex1.Polynom;
+import Ex1.Range;
+import Ex1.function;
 
-	public static void main(String[] args) {
-		Polynom p=new Polynom("3.0X^4+2.0X^3-30.0X^2+21.0X");
-		ComplexFunction cf=new ComplexFunction(new Monom ("x"));
-		function f=cf.initFromString("mul(X^2+3.0X-3.0,3.0X^2-7.0X)");
-		System.out.println(f.f(95.68951565065));
-		System.out.println(p.f(95.68951565065));
-		System.out.println(Math.abs(f.f(95.68951565065)-p.f(95.68951565065)));
-//		test();
-//		testOfString();
-//		testcomplexFunction();
-//		testDraw();
-//		testDrawFromJcon();
-//		try {
-//			testdiv();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
-	private static void testDrawFromJcon() {
+class Function_GUI_complexFunction_Test {
+	
+	@Test
+	void testDrawFromJcon() {
 		Functions_GUI cfColect = new Functions_GUI();
 
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^2+2x+1"));
@@ -45,8 +30,8 @@ public class edutest {
 	}
 	
 	
-	
-	private static void testDraw() {
+	@Test
+	void testDraw() {
 		Functions_GUI cfColect = new Functions_GUI();
 		cfColect.initFromFile("function_file.txt");
 		cfColect.drawFunctions(800,600,new Range(-10,10),new Range(-5,15),1000);
@@ -58,77 +43,22 @@ public class edutest {
 			System.out.println(e.toString());
 		}
 	}
-	private static void testdiv() throws Exception{
+	
+	@Test
+	void testdiv() throws Exception{
 		ComplexFunction cf = new ComplexFunction(new Polynom ("x^4+x^3-27x^2-25x+50"),new Polynom("x^3-4x^2-7x+10") , "div");
 		System.out.println(cf.equals(new Polynom("x+5")));
 		
 	}
-/**
-	@Override
-	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public double f(double x) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public function right() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void plus(function f1) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void mul(function f1) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void min(function f1) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void max(function f1) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public function left() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Operation getOp() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void div(function f1) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void comp(function f1) {
-		// TODO Auto-generated method stub
-	}
-};
-}
-**/
+
 public static final double EPS = 0.00001;
-public static void test() {
+
+@Test
+void test() {
 	Monom m1 = new Monom(2,2);
 	Monom m2 = new Monom(3,3);
 	ComplexFunction cf = new ComplexFunction("plus", m1,m2);
-	//	System.out.println(cf);
 	cf.mul(m2);
-	//	System.out.println(cf);
 	Polynom p = new Polynom();
 	p.add(m1);
 	p.add(m2);
@@ -145,7 +75,8 @@ public static void test() {
 	System.out.println("test 1 finish");
 }
 
-public static void testOfString() {
+@Test
+void testOfString() {
 	Polynom p1 = new Polynom();
 	p1.add(new Monom(2,2));
 	Polynom p2 = new Polynom();
@@ -154,7 +85,6 @@ public static void testOfString() {
 	Monom m2 = new Monom(3,3);
 	ComplexFunction cf = new ComplexFunction("plus", m1,m2);
 	ComplexFunction cf3 = new ComplexFunction("plus", p1,p2);
-	//System.out.println(cf);
 	cf.mul(m2);
 	cf3.mul(m2);
 	String s = cf3.toString();
@@ -168,7 +98,9 @@ public static void testOfString() {
 	System.out.println("test 2 finish");
 
 }
-public static void testcomplexFunction() {
+
+@Test
+void testcomplexFunction() {
 	String s1 = "3.1 +2.4x^2 -x^4";
 	String s2 = "5 +2x -3.3x +0.1x^5";
 	String[] s3 = {"x -1","x -2", "x -3", "x -4"};
@@ -198,11 +130,3 @@ public static void testcomplexFunction() {
 }
 
 }
-
-
-//Monom m1 = new Monom(2,2);
-//Monom m2 = new Monom(3,3);
-//ComplexFunction cf = new ComplexFunction("plus", m1,m2);
-//function cf2= cf.initFromString("plus(comp(min(x,x+9-x^2-7), max(x^2,2X)), 3x^5)");
-//function cf3=cf.initFromString(cf2.toString());
-//System.out.println(cf2.equals(cf3));

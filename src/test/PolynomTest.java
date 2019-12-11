@@ -2,8 +2,8 @@ package test;
 
 import java.util.Scanner;
 
-import myMath.Monom;
-import myMath.Polynom;
+import Ex1.Monom;
+import Ex1.Polynom;
 
 public class PolynomTest {
 	public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package test;
 
-import myMath.Monom;
-import myMath.Polynom;
-import myMath.Polynom_able;
-import myMath.function;
+import Ex1.Monom;
+import Ex1.Polynom;
+import Ex1.Polynom_able;
+import Ex1.function;
 
 public class PolynomTestEvgeny {
 	static int fails = 0;

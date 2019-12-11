@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 /*
  * this class represent a parameters of GOI window such as width,height,resolution,range of x and y.
  */

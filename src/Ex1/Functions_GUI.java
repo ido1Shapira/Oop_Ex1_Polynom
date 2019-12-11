@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 import java.awt.Color;
 
 import java.io.BufferedReader;
@@ -111,7 +111,7 @@ public class Functions_GUI implements functions {
 		this.functionsList.clear();
 	}
 	/**
-	 * this method get a file containing number of function and initial a collection of all those functions.
+	 * gets a file path and adds all the functions written in the file to the array list.
 	 */
 	@Override
 	public void initFromFile(String pathFile) {
@@ -133,7 +133,8 @@ public class Functions_GUI implements functions {
 		}
 	}
 	/**
-	 * method that making a file that contains all the function is the collection.
+	 * gets a name for the file we want to create
+	 *  and prints to the file all of the functions in our list.
 	 */
 	@Override
 	public void saveToFile(String file) throws IOException {		
@@ -155,8 +156,8 @@ public class Functions_GUI implements functions {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * this method get a function and painting it to a GOI window according the parameters this method got.
+	/**
+	 * this method gets a function and draws it to a GUI window according the parameters the method got.
 	 */
 	public Color paint(function f, Range rx, Range ry, int res) {	
 		double maxY = ry.get_max(), minY = ry.get_min();
@@ -207,12 +208,7 @@ public class Functions_GUI implements functions {
 
 		return new Color(r,g,b);
 	}
-	/**
-	 * Default values of the GOI window
-	 */
-	public void drawFunctions() {
-		this.drawFunctions(400, 400, new Range(-10,10), new Range (-5,15), 200);
-	}
+
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
 		int i=0;
@@ -227,7 +223,7 @@ public class Functions_GUI implements functions {
 		}
 	}
 	/**
-	 * this method get a jason file that contains parameters of the GOI window and drawing the collection base on the parameters.
+	 * this method get a json file that contains parameters for the GUI window and drawing the collection base on the parameters.
 	 */
 	@Override
 	public void drawFunctions(String json_file) {

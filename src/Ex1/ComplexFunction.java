@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 
 public class ComplexFunction implements complex_function{
 
@@ -142,6 +142,11 @@ public class ComplexFunction implements complex_function{
 	 */
 	@Override
 	public double f(double x) {
+		function f= (function)this;
+		if (f instanceof Polynom)
+				return ((Polynom)f).f(x);
+		if (f instanceof Monom)
+			return ((Monom)f).f(x);
 		switch (this.op){
 		case Comp:	//leftf(rightf(x))
 			double rightAns=this.right.f(x);

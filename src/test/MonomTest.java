@@ -2,7 +2,7 @@ package test;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import myMath.Monom;
+import Ex1.Monom;
 
 /**
  * This class represents a simple (naive) tester for the Monom class, 
