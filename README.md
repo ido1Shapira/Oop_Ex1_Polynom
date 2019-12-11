@@ -106,3 +106,17 @@ our method allows 2 unequal values in order to cover cases of holes in one funct
  
 # Functions GUI class
 
+Function GUI is an object that has one field which is an array list of functions. 
+
+Function GUI implements functions class which extends collection.
+We chose to use java’s array list.
+
+### Main methods in function GUI 
+
+•	InitFromFile- gets a file path and adds all the functions written in the file to the array list.
+
+•	saveToFile- gets a name for the file we want to create and prints to the file all of the functions in our list.
+
+•	paint (Auxiliary method) - this method get a function and painting it to a GOI window according the parameters this method got. 
+
+•	drawFunctions- there are three drawFunctions methods that there same goal to paint each function in the collection. Each method has a different way to get the parameters to the GUI window such as height, width, rx,ry and resolution. First not get any parameter and paint the window by a default parameters, second get a real parameters and third get the parameters from a json file.
