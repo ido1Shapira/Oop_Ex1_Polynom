@@ -5,16 +5,22 @@ import java.io.IOException;
 public class edutest {
 
 	public static void main(String[] args) {
-		test();
-		testOfString();
-		testcomplexFunction();
-	//	testDraw();
-		testDrawFromJcon();
-		try {
-			testdiv();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Polynom p=new Polynom("3.0X^4+2.0X^3-30.0X^2+21.0X");
+		ComplexFunction cf=new ComplexFunction(new Monom ("x"));
+		function f=cf.initFromString("mul(X^2+3.0X-3.0,3.0X^2-7.0X)");
+		System.out.println(f.f(95.68951565065));
+		System.out.println(p.f(95.68951565065));
+		System.out.println(Math.abs(f.f(95.68951565065)-p.f(95.68951565065)));
+//		test();
+//		testOfString();
+//		testcomplexFunction();
+//		testDraw();
+//		testDrawFromJcon();
+//		try {
+//			testdiv();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	private static void testDrawFromJcon() {
 		Functions_GUI cfColect = new Functions_GUI();
