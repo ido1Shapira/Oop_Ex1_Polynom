@@ -125,4 +125,4 @@ We chose to use java’s array list.
 
 •	paint (Auxiliary method) - this method get a function and painting it to a GOI window according the parameters this method got. 
 
-•	drawFunctions- there are three drawFunctions methods that there same goal to paint each function in the collection. Each method has a different way to get the parameters to the GUI window such as height, width, rx,ry and resolution. First not get any parameter and paint the window by a default parameters, second get a real parameters and third get the parameters from a json file.
+•	drawFunctions- there are three drawFunctions methods that have the  same goal, which is to draw each function in the collection. Each method has a different way to get the parameters for the GUI window such as height, width, rx (X axis range) ,ry (Y axis range) and resolution. the first doesn't get any parameter and draws the window according to default parameters. The second gets real parameters and draws accordingly. And the third gets the parameters from a json file.
