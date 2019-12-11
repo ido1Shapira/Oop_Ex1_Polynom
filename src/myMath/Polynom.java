@@ -282,6 +282,9 @@ public class Polynom implements Polynom_able{
 		}
 		return ans.substring(0);
 	}
+	/**
+	 * this method calls the constructor from a string for polynom
+	 */
 	@Override
 	public function initFromString(String s) {
 		return new Polynom(s);

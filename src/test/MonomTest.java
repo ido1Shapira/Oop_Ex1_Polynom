@@ -1,26 +1,55 @@
 package test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
-
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
 import myMath.Monom;
-import myMath.function;
 
-class MonomTest {
-	@Test
-	void testDerivative() {
-		Monom m1 = new Monom ("2x^5");
-		Monom expected = new Monom ("10x^4");
-		Monom actual = m1.derivative();
-		if (!actual.equals(expected))
-			fail("m1 not equals to m3 ,expected =" + expected.toString() + " got: " + actual.toString());
+/**
+ * This class represents a simple (naive) tester for the Monom class, 
+ * Note: <br>
+ * (i) The class is NOT a JUNIT - (i.e., educational reasons) - should be changed to a proper JUnit in Ex1. <br>
+ * (ii) This tester should be extend in order to test ALL the methods and functionality of the Monom class.  <br>
+ * (iii) Expected output:  <br>
+ * *****  Test1:  *****  <br>
+0) 2.0    	isZero: false	 f(0) = 2.0  <br>
+1) -1.0x    	isZero: false	 f(1) = -1.0  <br>
+2) -3.2x^2    	isZero: false	 f(2) = -12.8  <br>
+3) 0    	isZero: true	 f(3) = 0.0  <br>
+*****  Test2:  *****  <br>
+0) 0    	isZero: true  	eq: true  <br>
+1) -1.0    	isZero: false  	eq: true  <br>
+2) -1.3x    	isZero: false  	eq: true  <br>
+3) -2.2x^2    	isZero: false  	eq: true  <br>
+ */
+public class MonomTest {
+	public static void main(String[] args) {
+		test1();
+		test2();
+		test3();
+		test4();
 	}
-
-	@Test
-	void testF() {
+	private static void test4() {
+		System.out.println("*****  Test4:  *****");
+		Monom m1 = new Monom ("-3*X");
+		Monom m2 = new Monom ("4*x");
+		Monom m3 = new Monom ("8x^2");
+		//f(x):
+		System.out.println("m1= "+m1.toString()+",   m2= "+ m2.toString()+",   m3= "+m3.toString());
+		System.out.println("m1(1)= "+ m1.f(1));
+		System.out.println("m2(2)= "+ m2.f(2));
+		System.out.println("m3(3)= "+ m3.f(3));
+		//derivative:
+		System.out.println("m1'(x) = " + m1.derivative().toString()+"  m2'(x) = " + m2.derivative().toString()+"  m3'(x) = " + m3.derivative().toString());
+		//add:
+		m1.add(m2);
+		System.out.println("m1+m2= "+ m1.toString());
+		//Multiply:
+		m1.multipy(m3);
+		System.out.println("(m1+m2)*m3= "+ m1.toString());
+		
+	}
+	private static void test3() {
+		System.out.println("*****  Test3:  *****");
 		String[] monoms = {"34","x","2*x","3*X", "-x","-3.2*x^2","4","0*x^5","2*x^2","3.56*x^4","x^6"};
 		for(int i=0;i<monoms.length;i++) {
 			Monom m = new Monom(monoms[i]);
@@ -29,15 +58,9 @@ class MonomTest {
 			double fx = m.f(i);
 			System.out.println(i+") "+m +"    \tisZero: "+m.isZero()+"\t f("+i+") = "+fx);
 		}
-		double expected = 21;
-		double actual = new Monom ("-3*X").f(-7);
-		
-		assertEquals(expected, actual, "Test f(x)");
-		
 	}
-
-	@Test
-	void testIsZero() {
+	private static void test2() {
+		System.out.println("*****  Test2:  *****");
 		ArrayList<Monom> monoms = new ArrayList<Monom>();
 		monoms.add(new Monom(0,5));
 		monoms.add(new Monom(-1,0));
@@ -51,13 +74,11 @@ class MonomTest {
 			boolean e = m.equals(m1);
 			System.out.println(i+") "+m +"    \tisZero: "+m.isZero()+"  \teq: "+e);
 		}
-		Monom m1 = new Monom ("0");
-		if (!m1.isZero())
-			fail("the monom not zero");
 	}
 
-	@Test
-	void testMonomString() {
+	private static void test1() {
+		System.out.println("*****  Test1:  *****");
+		System.out.println("some examples of monoms - x^5, x*6 4x^7, 3*x^2,y^5, 4*x^-1,  7x^8");
 		String[]monomsArr = {"x^5","x*6", "4x^7", "3*x^2","y^5","4*x^-1","  7x^8"};
 		for (int i = 0; i < monomsArr.length; i++) {
 			try {
@@ -66,58 +87,21 @@ class MonomTest {
 			} catch(Exception e) {
 				System.out.println(monomsArr[i]+" is illegal monom :(\n");
 			}
+		}	
+		System.out.println("now you try! please enter a monom, notice not to add unnecessary spaces");
+		Scanner sc = new Scanner(System.in);
+		String tryMy= sc.next();
+		while (!tryMy.equals("s")) {
+			try {
+				new Monom(tryMy);
+				System.out.println("it was a good one!");
+			}
+			catch(Exception e) {
+				System.out.println("it wasn't a legal monom :(");
+			}
+			System.out.println("please enter another monom , to stop type s");
+			tryMy=sc.next();
 		}
+		sc.close();
 	}
-
-	@Test
-	void testAdd() {
-		Monom m1 = new Monom ("2x");
-		Monom m2 = new Monom ("-3x");
-		Monom m3 = new Monom ("-x");
-		m1.add(m2);
-		if (!m1.equals(m3))
-			fail("m1 not equals to m3 ,expected =" + m3.toString() + "got: " + m1.toString());
-	}
-
-	@Test
-	void testMultipy() {
-		Monom m1 = new Monom ("2x");
-		Monom m2 = new Monom ("-3x");
-		Monom m3 = new Monom ("-6x^2");
-		m1.multipy(m2);
-		if (!m1.equals(m3))
-			fail("m1 not equals to m3 ,expected =" + m3.toString() + "got: " + m1.toString());
-	}
-
-	@Test
-	void testToString() {
-		String expected = new Monom ("3*x^2").toString();
-		String actual = new Monom ("3.0x^2").toString();
-		assertEquals(expected, actual, "monom.toString, expected = "+ expected + " got: " + actual);
-	}
-
-	@Test
-	void testEqualsMonom() {
-		Monom m1 = new Monom ("2x");
-		Monom m2 = new Monom ("2*x");
-		if (!m1.equals(m2))
-			fail("m1 not equals to m3 ,expected =" + m2.toString() + "got: " + m1.toString());
-	}
-	@Test
-	void testInitFromString() {
-		Monom m=new Monom("2x^7");
-		function d=m.initFromString(m.toString());
-		if(!m.equals(d))
-			fail("initFromString failed");
-	}
-
-	@Test
-	void testCopy() {
-		Monom m=new Monom ("2x");
-		function f=m.copy();
-		m.add(new Monom ("4x"));
-		if(f.equals(m))
-			fail("copy failed");
-	}
-
 }

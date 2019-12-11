@@ -1,18 +1,19 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
 import myMath.Monom;
 import myMath.Polynom;
-import myMath.Polynom_able;
-import myMath.function;
 
-class PolynomTest {
-
-	@Test
-	void testPolynomString() {
+public class PolynomTest {
+	public static void main(String[] args) {
+		test1();
+		test2();
+		test3();
+		test4();
+	}
+	private static void test3() {
+		System.out.println("*****  Test4:  *****");
 		System.out.println("some examples of polynoms - "
 				+ "x7, x^3*x-5,(3+4)*x^2 , x^5-x^-1,y^2+2y-1,3x^2+X^3+4, "
 				+ "4*x^3+2x^2-5X+1, 8X^3-5, 4X-2X^2-2X+5+7");
@@ -26,115 +27,81 @@ class PolynomTest {
 			} catch(Exception e) {
 				System.out.println(polynomsArr[i]+" is illegal polynom :(\n");
 			}
+		}	
+		System.out.println("now you try! please enter a polynom");
+		Scanner sc = new Scanner(System.in);
+		String tryMy= sc.next();
+		while (!tryMy.equals("s")) {
+			try {
+				new Polynom(tryMy);
+				System.out.println("it was a good one!");
+			}
+			catch(Exception e) {
+				System.out.println("it wasn't a legal polynom :(");
+			}
+			System.out.println("please enter another polynom , to stop type s");
+			tryMy=sc.next();
 		}
+		sc.close();
 	}
-
-	@Test
-	void testF() {
+	private static void test4() {
+		System.out.println("*****  Test4:  *****");
+		System.out.println("some good examples of polynnoms - ");
+		Polynom p1 = new Polynom("3x^2+x^3+4");
+		Polynom p2 = new Polynom("4*x^3+x^2-5X+1");
 		Polynom p3 = new Polynom("8X^3-5");
-		double actual = p3.f(2);
-		double expected = 59;
-		assertEquals(expected, actual, "f(x)\np(3) expected= "+ expected + " got: " +actual);
-
-	}
-
-	@Test
-	void testAddPolynom_able() {
-		Polynom p1 = new Polynom("3x^2+x^3+4");
-		Polynom p2 = new Polynom("4*x^3+x^2-5X+1");
-		Polynom expected = new Polynom("5x^3+4x^2-5x+5");
+		Polynom p4 = new Polynom("4X-2X^2-2X+5+7");
+		System.out.println("p1 is: "+p1.toString()+ "\np2 is: "+p2.toString()
+		+ "\np2 is: "+p2.toString()+ "\np2 is: "+p2.toString());
 		p1.add(p2);
-		if(!p1.equals(expected))
-			fail("add Polynoms, expected="+ expected+ " got: "+ p1);
+		System.out.println("the add method: p1=p1+p2 \np1="+p1.toString());
+		p2.substract(p3);
+		System.out.println("the substract method: p2=p2-p3 \np2="+p2.toString());
+		p3.multiply(p3);
+		System.out.println("the multiply method: p3=p3*p3 \np3="+p3.toString());
+		System.out.println("the f(x) method: p4(3)="+p4.f(3));
+		
+		p1=new Polynom("2+3X^2+x^3-5");
+		p2=new Polynom("X^3+3X^2-3");
+		System.out.println("p1 now is: "+p1.toString()+ "\np2 now is: "+p2.toString());
+		System.out.println("is p1 logically equal to p2? "+p1.equals(p2) );
+		
+		p3= new Polynom ("x^2-8*X+15"); //x=5, 3
+		System.out.println("p3="+p3.toString());
+		System.out.println("p3 roots are x=5, x=3");
+		System.out.println("p3 root between x=1 and x=4 suppose to be 3");
+		System.out.println("p3.root(1, 4, epsilon) = " + p3.root(1, 4, Monom.EPSILON));
+		System.out.println("the area above x axis between x=0 and x=5 is: " + p3.area(0, 5, Monom.EPSILON));
+		System.out.println("p7 derivative is= "+p3.derivative());
 	}
-
-	@Test
-	void testAddMonom() {
-		Polynom p = new Polynom("2x^2-1");
-		Monom m = new Monom("2x");
-		Polynom expected = new Polynom("2x^2+2x-1");
-		p.add(m);
-		if(!p.equals(expected))
-			fail("add monom to polynom faild, expected="+ expected+ " got: "+ p);
+	public static void test1() {
+		System.out.println("*****  Test1:  *****");
+		Polynom p1 = new Polynom();
+		String[] monoms = {"1","x","x^2", "0.5x^2"};
+		for(int i=0;i<monoms.length;i++) {
+			Monom m = new Monom(monoms[i]);
+			p1.add(m);
+		}
+		System.out.println(p1.toString());
 	}
-
-	@Test
-	void testSubstract() {
-		Polynom p1 = new Polynom("3x^2+x^3+4");
-		Polynom p2 = new Polynom("4*x^3+x^2-5X+1");
-		Polynom expected = new Polynom("-3x^3+2x^2+5x+3");
-		p1.substract(p2);
-		if(!p1.equals(expected))
-			fail("substract Polynoms, expected="+ expected+ " got: "+ p1);
-	}
-
-	@Test
-	void testMultiplyPolynom_able() {
-		Polynom p1 = new Polynom("x+2");
-		Polynom p2 = new Polynom("x-3");
-		Polynom expected = new Polynom("x^2-x-6");
+	public static void test2() {
+		System.out.println("*****  Test2:  *****");
+		Polynom p1 = new Polynom(), p2 =  new Polynom();
+		String[] monoms1 = {"2", "-x","-3.2x^2","4","-1.5x^2"};
+		String[] monoms2 = {"5", "1.7x","3.2x^2","-3","-1.2x^2"};
+		for(int i=0;i<monoms1.length;i++) {
+			Monom m = new Monom(monoms1[i]);
+			p1.add(m);
+		}
+		for(int i=0;i<monoms2.length;i++) {
+			Monom m = new Monom(monoms2[i]);
+			p2.add(m);
+		}
+		System.out.println("p1: "+p1);
+		System.out.println("p2: "+p2);
+		p1.add(p2);
+		System.out.println("p1+p2: "+p1);
 		p1.multiply(p2);
-		if(!p1.equals(expected))
-			fail("multiply Polynoms, expected="+ expected+ " got: "+ p1);	
+		System.out.println("(p1+p2)*p2: "+p1);
 	}
-
-	@Test
-	void testEqualsPolynom_able() {
-		Polynom p1 = new Polynom("2x^2-2");
-		Polynom p2 = new Polynom("2*x^2-2");
-		if(!p1.equals(p2))
-			fail("the polynom are needed to be equals: p1="+ p1.toString()+ " p2: "+ p2.toString());	
-	}
-
-	@Test
-	void testIsZero() {
-		Polynom p1 = new Polynom("0");
-		if(!p1.equals(Polynom.ZERO))
-			fail("the polynom are needed to be equals: p1="+ p1.toString()+ " p2: "+ Polynom.ZERO.toString());
-	}
-
-	@Test
-	void testRoot() {
-		Polynom p3= new Polynom ("x^2-8*X+15"); //x=5, 3
-		double expected = 3;
-		double actual = p3.root(1, 4, Monom.EPSILON);
-		if (expected -  actual > Monom.EPSILON)
-			fail("p3 roots are x=5, x=3\nroot expected= "+ expected + " got: " +actual);
-	}
-
-	@Test
-	void testDerivative() {
-		Polynom p = new Polynom("x^3-2x-6");
-		Polynom expected = new Polynom("3x^2-2");
-		Polynom_able actual = p.derivative();
-		if(!actual.equals(expected))
-			fail("derivative Polynom, expected="+ expected.toString()+ " got: "+ actual.toString());	
-	}
-
-	@Test
-	void testArea() {
-		Polynom p= new Polynom ("x^2-8*X+15"); //x=5, 3
-		double expected = 18.00000075141877; 
-		double actual = p.area(0,5, Monom.EPSILON);
-		assertEquals(expected, actual, "p area ander the curve between 0 to 5\narea expected= "+ expected + " got: " +actual);
-	}
-
-	@Test
-	void testMultiplyMonom() {
-		Polynom p = new Polynom("2x^2-1");
-		Monom m = new Monom("2x");
-		Polynom expected = new Polynom("4x^3-2x");
-		p.multiply(m);
-		if(!p.equals(expected))
-			fail("add monom to polynom faild, expected="+ expected+ " got: "+ p);
-	}
-
-	@Test
-	void testInitFromString() {
-		Polynom p=new Polynom("2x^7+2x^2-9");
-		function d=p.initFromString(p.toString());
-		if(!p.equals(d))
-			fail("initFromString failed");
-	}
-
 }

@@ -237,7 +237,7 @@ public class ComplexFunction implements complex_function{
 	}
 	/**
 	 * this method checks whether the object and our complex function are visually similar. 
-	 * if the object is not a function return false, else we check the range (-2,2) and in addition 5 random ranges.
+	 * if the object is not a function return false, else we check the range (-2,2) and in addition 100 random integers.
 	 * @param obj the object we compare to
 	 * @return true if the values we checked are equals, false otherwise  
 	 */
@@ -252,19 +252,18 @@ public class ComplexFunction implements complex_function{
 				}
 			}
 			for (int i = 0; i < 1000; i++) {
-				int d = (int) (Math.random()*100*Math.pow(-1,i));
+				int d = (int) (Math.random()*10000*Math.pow(-1,i));
 				if (obj instanceof Monom) {
 					if (Math.abs(((function) obj).f(d)-this.f(d))>Monom.EPSILON) {
 						failes++;
 						if(failes>2)
 							return false;
 					}
-
 				}
 			}
 			return true;
 		}
-		else {
+		else { // if not instance of function
 			return false;
 		}
 	}  
@@ -272,7 +271,6 @@ public class ComplexFunction implements complex_function{
 	public function copy() {	
 		ComplexFunction cf=new ComplexFunction(new Monom("x"));
 		return (function) cf.initFromString(this.toString());
-		//		return (function) new ComplexFunction(this.left.copy(), this.right.copy(), this.op);
 	}
 	@Override
 	public void plus(function f1) {

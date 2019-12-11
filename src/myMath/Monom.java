@@ -278,11 +278,16 @@ public class Monom implements function{
 	}
 	private double _coefficient; 
 	private int _power;
-	
+	/**
+	 * this method calls the constructor from a string for monom
+	 */
 	@Override
 	public function initFromString(String s) {
 		return new Monom(s);
 	}
+	/*
+	 * copy constructor
+	 */
 	@Override
 	public function copy() {
 		return new Monom(this.toString());

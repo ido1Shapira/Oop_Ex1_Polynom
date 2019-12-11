@@ -17,7 +17,11 @@ import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
+/**
+ * this class represents collection of function
+ * that has four main methods: initFromFile,saveToFile and two drawfunction.
+ * @author ido shapira & edut cohen
+ */
 public class Functions_GUI implements functions {
 	private ArrayList<function> functionsList;
 
@@ -27,17 +31,24 @@ public class Functions_GUI implements functions {
 	public Functions_GUI() {
 		this.functionsList = new ArrayList<function>();
 	}
-
+	/**
+	 * return how many functions are there
+	 */
 	@Override
 	public int size() {
 		return this.functionsList.size();
 	}
-
+	/**
+	 * this method return if there is at least one function in the collection.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return this.functionsList.isEmpty();
 	}
-
+	/**
+	 * this method return if the object contains in the collection.
+	 * it can happen just and only if the object instance of function.
+	 */
 	@Override
 	public boolean contains(Object o) {
 		if(o instanceof function) {
@@ -60,12 +71,16 @@ public class Functions_GUI implements functions {
 	public <T> T[] toArray(T[] a) {
 		return this.functionsList.toArray(a);
 	}
-
+	/**
+	 * add a function to the collection
+	 */
 	@Override
 	public boolean add(function e) {
 		return this.functionsList.add(e);
 	}
-
+	/**
+	 * remove a function to the collection
+	 */
 	@Override
 	public boolean remove(Object o) {
 		return this.functionsList.remove(o);
@@ -95,7 +110,9 @@ public class Functions_GUI implements functions {
 	public void clear() {
 		this.functionsList.clear();
 	}
-
+	/**
+	 * this method get a file containing number of function and initial a collection of all those functions.
+	 */
 	@Override
 	public void initFromFile(String pathFile) {
 		try {
@@ -115,7 +132,9 @@ public class Functions_GUI implements functions {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
-
+	/**
+	 * method that making a file that contains all the function is the collection.
+	 */
 	@Override
 	public void saveToFile(String file) throws IOException {		
 		try 
@@ -136,7 +155,9 @@ public class Functions_GUI implements functions {
 			e.printStackTrace();
 		}
 	}
-
+	/*
+	 * this method get a function and painting it to a GOI window according the parameters this method got.
+	 */
 	public Color paint(function f, Range rx, Range ry, int res) {	
 		double maxY = ry.get_max(), minY = ry.get_min();
 		double maxX = rx.get_max(), minX = rx.get_min();
@@ -186,6 +207,9 @@ public class Functions_GUI implements functions {
 
 		return new Color(r,g,b);
 	}
+	/**
+	 * Default values of the GOI window
+	 */
 	public void drawFunctions() {
 		this.drawFunctions(400, 400, new Range(-10,10), new Range (-5,15), 200);
 	}
@@ -202,6 +226,9 @@ public class Functions_GUI implements functions {
 			i++;
 		}
 	}
+	/**
+	 * this method get a jason file that contains parameters of the GOI window and drawing the collection base on the parameters.
+	 */
 	@Override
 	public void drawFunctions(String json_file) {
 		try 
@@ -225,9 +252,4 @@ public class Functions_GUI implements functions {
 		}
 
 	}
-
-	public function get(int i) {
-		return this.functionsList.get(i);
-	}
-
 }
