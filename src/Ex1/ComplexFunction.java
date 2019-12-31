@@ -282,7 +282,7 @@ public class ComplexFunction implements complex_function{
 	}
 	/**
 	 * this method builds a new complex function 
-	 * which it's left side is our complex function’s old pointer,
+	 * which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the plus.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
@@ -296,7 +296,7 @@ public class ComplexFunction implements complex_function{
 	}
 	/**
 	 * this method builds a new complex function
-	 * which it's left side is our complex function’s old pointer,
+	 * which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the times.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
@@ -309,7 +309,7 @@ public class ComplexFunction implements complex_function{
 		this.op = Operation.Times;
 	}
 	/**
-	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * this method builds a new complex function which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the divid.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
@@ -322,7 +322,7 @@ public class ComplexFunction implements complex_function{
 		this.op = Operation.Divid;
 	}
 	/**
-	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * this method builds a new complex function which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the max.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
@@ -335,7 +335,7 @@ public class ComplexFunction implements complex_function{
 		this.op = Operation.Max;
 	}
 	/**
-	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * this method builds a new complex function which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the min.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
@@ -348,7 +348,7 @@ public class ComplexFunction implements complex_function{
 		this.op = Operation.Min;
 	}
 	/**
-	 * this method builds a new complex function which it's left side is our complex function’s old pointer,
+	 * this method builds a new complex function which it's left side is our complex function's old pointer,
 	 * it's right side is f1's copy and it's operation is the comp.
 	 * our complex function now points this new Complex function
 	 * @param f1 the function to put on the right side 
